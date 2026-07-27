@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Physiotherapie Monica Mattenberger in Wien-Floridsdorf (1210). Individuelle Physiotherapie — Spiraldynamik®, Lymphdrainage, Manuelle Therapie und mehr. Termine nach Vereinbarung.">
+  <title>Physiotherapie Monica Mattenberger · 1210 Wien</title>
+
+  <!-- Fonts: Fraunces (headings) + Karla (body). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!--
+    Single-page site for Physiotherapie Monica Mattenberger.
+    Structure (top to bottom): header, hero, intro, therapy grid, praxis, termin, footer.
+    Editing notes (swapping text/photos) are in README.md.
+    Interactions live in script.js; styling in style.css.
+  -->
+
+  <!-- ===== Header ===== -->
+  <header id="siteHeader">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top">
+        <!-- Placeholder logo. Replace with: <img src="images/logo.svg" alt="Logo" class="brand-logo"> -->
+        <svg width="38" height="38" viewBox="0 0 40 40" role="img" aria-label="Logo">
+          <circle cx="20" cy="7" r="4.2" fill="#C4315E"/>
+          <path d="M20 13 L13 34 M20 13 L27 34 M20 13 L9 18 M20 13 L31 18" stroke="#C4315E" stroke-width="3.6" stroke-linecap="round" fill="none"/>
+          <path d="M7 25 C14 20, 26 30, 34 23" stroke="#C4315E" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+        <span class="brand-name">Monica Mattenberger<small>Praxis für Physiotherapie</small></span>
+      </a>
+
+      <div class="nav-cluster">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#therapieformen">Therapieformen</a></li>
+          <li><a href="#praxis">Die Praxis</a></li>
+          <li><a href="#termin">Ihr Termin</a></li>
+        </ul>
+
+        <!-- Phone: shown early and prominently; stays visible on mobile too. -->
+        <a class="phone-pill" href="tel:+436506022101">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          0650 60 22 101
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Menü öffnen" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ===== Hero =====
+         Background is a placeholder gradient; see .hero-bg in style.css to use a photo. -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="wrap hero-content">
+        <p class="hero-eyebrow fade-up d1">Praxis für Physiotherapie · 1210 Wien</p>
+        <h1 class="fade-up d2">Bewegung, die <em>wieder gut tut</em>.</h1>
+        <p class="hero-sub fade-up d3">Individuelle Physiotherapie in ruhiger Atmosphäre in Wien-Floridsdorf — abgestimmt auf Ihren Körper und Ihren Alltag.</p>
+        <div class="hero-cta-row fade-up d4">
+          <a class="btn btn-primary" href="#termin">Termin vereinbaren</a>
+          <a class="btn btn-ghost" href="#therapieformen">Therapieformen ansehen</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Intro ===== -->
+    <section class="section section-cream" id="intro">
+      <div class="wrap">
+        <div class="intro-grid reveal">
+          <div>
+            <p class="eyebrow">Willkommen</p>
+            <h2>Monica Mattenberger</h2>
+            <p class="lead">Physiotherapeutin seit 2002 nach vierjähriger Ausbildung in der Schweiz, selbstständig in Wien seit 2011. Nach einer genauen Befundung entsteht ein Therapieprogramm, das zu Ihnen passt.</p>
+
+            <!-- Berufliche Erfahrungen = one accordion item (real text). -->
+            <div class="accordion intro-accordion">
+              <div class="accordion-item">
+                <button class="accordion-trigger">Berufliche Erfahrungen <span class="chev">&#9662;</span></button>
+                <div class="accordion-content">
+                  <div class="accordion-content-inner">
+                    <p>Gymnastikpädagogik-Ausbildung an der Gymnastikdiplomschule GDS in Basel (Abschluss 1995). Physiotherapie-Ausbildung in Schinznach Bad, Schweiz (4 Jahre, Abschluss 2002), nostrifiziert in Österreich. Selbstständig in Wien seit 2011.</p>
+                    <ul>
+                      <li>Spezialklinik aarReha, Schinznach Bad — Rehabilitation, Rheumatologie, Osteoporose</li>
+                      <li>Regionalspital La Carità, Locarno — Orthopädie, Medizin, Chirurgie, Neurologie</li>
+                      <li>Fortbildungen u.&nbsp;a. Spiraldynamik®, Craniosacrale Berührung, K-Taping, Lymphdrainage nach Vodder</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="chapter-links">
+              <a class="chapter-link" href="#therapieformen">Therapieformen &rarr;</a>
+              <a class="chapter-link" href="#praxis">Die Praxis &rarr;</a>
+              <a class="chapter-link" href="#termin">Ihr Termin &rarr;</a>
+            </div>
+          </div>
+
+          <!-- PLATZHALTER-PORTRÄT: replace this whole box with <img src="images/portrait.jpg" alt="Monica Mattenberger" class="intro-portrait-img"> -->
+          <div class="intro-portrait">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+            <span>Platzhalter für Porträtfoto</span>
+          </div>
+        </div>
+
+        <div class="intro-quote reveal">
+          <blockquote>„Ich helfe Ihnen, einen Weg zu mehr Wohlbefinden zu finden. Durch unsere gemeinsame Arbeit werden scheinbar undenkbare Bewegungen zur Realität!"</blockquote>
+          <cite>Monica Mattenberger</cite>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path fill="#F6EFDF" d="M0,0 C240,48 480,48 720,24 C960,0 1200,0 1440,28 L1440,0 L0,0 Z"/></svg>
+    </div>
+
+    <!-- ===== Therapieformen =====
+         Tiles show the therapy name + the conditions it treats. Clicking a tile
+         opens the wide detail box below it (script.js handles this). Each tile's
+         detail text lives in its own <template> below. The small icon is the
+         current tile "picture" — see therapy-tile-picture-options.html for the
+         photo alternatives. -->
+    <section class="section section-white" id="therapieformen">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Behandlung</p>
+          <h2>Therapieformen</h2>
+          <p>Durch fundierte Ausbildung und laufende Fortbildungen wähle ich maßgeschneidert aus einer Reihe von Methoden. Für weitere Infos auf eine Therapieform klicken.</p>
+        </div>
+
+        <div class="therapy-grid reveal" id="therapyGrid">
+
+          <button class="therapy-card">
+            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 15a3 3 0 1 0-3-3 5 5 0 1 0 5 5 7 7 0 1 0-7-7"/></svg></span>
+            <strong>Spiraldynamik®</strong>
+            <span class="therapy-conditions">Orthopädische und rheumatologische Erkrankungen, Osteoporose, nach Operationen</span>
+            <span class="therapy-more">Mehr erfahren &rarr;</span>
+            <template>
+              <h3>Spiraldynamik®</h3>
+              <p class="detail-conditions"><strong>Anwendung bei:</strong> Orthopädische und rheumatologische Erkrankungen, Osteoporose, nach Operationen</p>
+              <p>Platzhaltertext: ausführliche Beschreibung der Methode Spiraldynamik® (folgt von der Klientin).</p>
+            </template>
+          </button>
+
+          <button class="therapy-card">
+            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span>
+            <strong>Lymphdrainage</strong>
+            <span class="therapy-conditions">Lip-/Lymphödem, nach Krebs und Operationen</span>
+            <span class="therapy-more">Mehr erfahren &rarr;</span>
+            <template>
+              <h3>Lymphdrainage</h3>
+              <p class="detail-conditions"><strong>Anwendung bei:</strong> Lip-/Lymphödem, nach Krebs und Operationen</p>
+              <p>Platzhaltertext: ausführliche Beschreibung der manuellen Lymphdrainage.</p>
+            </template>
+          </button>
+
+          <button class="therapy-card">
+            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v6"/><path d="M12 10c-1.6-1.4-5-1-5 2.6 0 3.2.6 6.4 2.6 6.4S12 17 12 14.6"/><path d="M12 10c1.6-1.4 5-1 5 2.6 0 3.2-.6 6.4-2.6 6.4S12 17 12 14.6"/></svg></span>
+            <strong>Atemtherapie</strong>
+            <span class="therapy-conditions">COPD, Post-Covid, Atemfunktionsstörung</span>
+            <span class="therapy-more">Mehr erfahren &rarr;</span>
+            <template>
+              <h3>Atemtherapie</h3>
+              <p class="detail-conditions"><strong>Anwendung bei:</strong> COPD, Post-Covid, Atemfunktionsstörung</p>
+              <p>Platzhaltertext: ausführliche Beschreibung der Atemtherapie.</p>
+            </template>
+          </button>
+
+          <button class="therapy-card">
+            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="4.5"/><path d="M5.5 18c2.2-1.3 4.3 1.3 6.5 0s4.3-1.3 6.5 0"/></svg></span>
+            <strong>Craniosacraltherapie</strong>
+            <span class="therapy-conditions">Verspannungen, Schmerzen, Traumata</span>
+            <span class="therapy-more">Mehr erfahren &rarr;</span>
+            <template>
+              <h3>Craniosacraltherapie</h3>
+              <p class="detail-conditions"><strong>Anwendung bei:</strong> Verspannungen, Schmerzen, Traumata</p>
+              <p>Platzhaltertext: ausführliche Beschreibung der Craniosacraltherapie.</p>
+            </template>
+          </button>
+
+          <button class="therapy-card">
+            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="2"/><path d="M12 7v6M12 13l-3.5 4.5M12 13l3.5 4.5M8.5 10h7"/></svg></span>
+            <strong>Funktionelle Bewegungslehre</strong>
+            <span class="therapy-conditions">Orthopädische Erkrankungen (Rücken, Hüfte, Knie, …), Osteoporose, nach Operationen</span>
+            <span class="therapy-more">Mehr erfahren &rarr;</span>
+            <template>
+              <h3>Funktionelle Bewegungslehre</h3>
+              <p class="detail-conditions"><strong>Anwendung bei:</strong> Orthopädische Erkrankungen (Rücken, Hüfte, Knie, …), Osteoporose, nach Operationen</p>
+              <p>Platzhaltertext: ausführliche Beschreibung der Funktionellen Bewegungslehre.</p>
+            </template>
+          </button>
+
+          <button class="therapy-card">
+            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.6a1.5 1.5 0 0 1 3 0V10m0-1V4.6a1.5 1.5 0 0 1 3 0V10m0-.6V6.2a1.5 1.5 0 0 1 3 0V13a6 6 0 0 1-6 6 6 6 0 0 1-5.2-3l-1.6-2.8a1.5 1.5 0 0 1 2.6-1.5L9 13"/></svg></span>
+            <strong>Manuelle Therapie</strong>
+            <span class="therapy-conditions">Verspannungen, Blockierungen, Schmerzen in Gelenken</span>
+            <span class="therapy-more">Mehr erfahren &rarr;</span>
+            <template>
+              <h3>Manuelle Therapie</h3>
+              <p class="detail-conditions"><strong>Anwendung bei:</strong> Verspannungen, Blockierungen, Schmerzen in Gelenken</p>
+              <p>Platzhaltertext: ausführliche Beschreibung der Manuellen Therapie.</p>
+            </template>
+          </button>
+
+          <button class="therapy-card">
+            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M12 5c-2.2 0-3.2 1-3.2 1M12 8.2c2.2 0 3.2 1 3.2 1M12 11.4c-2.2 0-3.2 1-3.2 1M12 14.6c2.2 0 3.2 1 3.2 1M12 17.8c-2.2 0-3.2 1-3.2 1"/></svg></span>
+            <strong>Selbstmobilisation nach McKenzie</strong>
+            <span class="therapy-conditions">Bandscheibenvorfall / Hexenschuss</span>
+            <span class="therapy-more">Mehr erfahren &rarr;</span>
+            <template>
+              <h3>Selbstmobilisation nach McKenzie</h3>
+              <p class="detail-conditions"><strong>Anwendung bei:</strong> Bandscheibenvorfall / Hexenschuss</p>
+              <p>Platzhaltertext: ausführliche Beschreibung der McKenzie-Methode.</p>
+            </template>
+          </button>
+
+          <button class="therapy-card">
+            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7c0 5.5 3 9.5 7 9.5s7-4 7-9.5"/><path d="M4.5 7h15"/><path d="M9 7v3.2M15 7v3.2"/></svg></span>
+            <strong>Beckenbodengymnastik</strong>
+            <span class="therapy-conditions">Inkontinenz, Blasenschwäche, Beckenbodensenkung, Hämorrhoiden, Rückenschmerzen</span>
+            <span class="therapy-more">Mehr erfahren &rarr;</span>
+            <template>
+              <h3>Beckenbodengymnastik</h3>
+              <p class="detail-conditions"><strong>Anwendung bei:</strong> Inkontinenz, Blasenschwäche, Beckenbodensenkung, Hämorrhoiden, Rückenschmerzen</p>
+              <p>Platzhaltertext: ausführliche Beschreibung der Beckenbodengymnastik.</p>
+            </template>
+          </button>
+
+          <button class="therapy-card">
+            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 4 14h6l-1 7 9-11h-6z"/></svg></span>
+            <strong>Neuromobilisation</strong>
+            <span class="therapy-conditions">Bandscheibenvorfall, Karpaltunnel-Syndrom, unspezifische Schmerzsyndrome</span>
+            <span class="therapy-more">Mehr erfahren &rarr;</span>
+            <template>
+              <h3>Neuromobilisation</h3>
+              <p class="detail-conditions"><strong>Anwendung bei:</strong> Bandscheibenvorfall, Karpaltunnel-Syndrom, unspezifische Schmerzsyndrome</p>
+              <p>Platzhaltertext: ausführliche Beschreibung der Neuromobilisation.</p>
+            </template>
+          </button>
+
+          <button class="therapy-card">
+            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7l12 10M6 17 18 7"/></svg></span>
+            <strong>Kinesio-Taping</strong>
+            <span class="therapy-conditions">Sehnenprobleme, Gelenkschmerzen, Beschwerden beim Sport</span>
+            <span class="therapy-more">Mehr erfahren &rarr;</span>
+            <template>
+              <h3>Kinesio-Taping</h3>
+              <p class="detail-conditions"><strong>Anwendung bei:</strong> Sehnenprobleme, Gelenkschmerzen, Beschwerden beim Sport</p>
+              <p>Platzhaltertext: ausführliche Beschreibung des Kinesio-Tapings.</p>
+            </template>
+          </button>
+
+          <button class="therapy-card">
+            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4.5c1.8 0 2.8 2 2.8 5s.2 6-1.8 8-4 1-4-2c0-2 1-3 1-5s.2-6 2-6z"/><circle cx="13.2" cy="6.4" r="0.9"/><circle cx="14.8" cy="8.2" r="0.8"/><circle cx="15.8" cy="10.4" r="0.8"/></svg></span>
+            <strong>Fußtherapie</strong>
+            <span class="therapy-conditions">Fußfehlstellungen, Hallux, Hammerzehe</span>
+            <span class="therapy-more">Mehr erfahren &rarr;</span>
+            <template>
+              <h3>Fußtherapie</h3>
+              <p class="detail-conditions"><strong>Anwendung bei:</strong> Fußfehlstellungen, Hallux, Hammerzehe</p>
+              <p>Platzhaltertext: ausführliche Beschreibung der Fußtherapie.</p>
+            </template>
+          </button>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path fill="#FFFDF9" d="M0,28 C240,0 480,0 720,24 C960,48 1200,48 1440,8 L1440,0 L0,0 Z"/></svg>
+    </div>
+
+    <!-- ===== Die Praxis ===== -->
+    <section class="section section-beige" id="praxis">
+      <div class="wrap">
+        <div class="praxis-grid reveal">
+          <div class="praxis-text">
+            <p class="eyebrow">Die Praxis</p>
+            <h2>Praxisräumlichkeiten</h2>
+            <p>Die Praxis besteht aus einem hellen und ruhig gelegenen Therapieraum mit Spiegelwand und bequemer, beheizbarer Liege.</p>
+            <p>Angeschlossen daran ist ein kleiner Wartebereich mit Kundentoilette.</p>
+          </div>
+          <div class="praxis-photos">
+            <!-- PLATZHALTER-FOTO 1: replace with <img src="images/therapieraum.jpg" alt="Therapieraum" class="praxis-photo-img"> (Foto-Credit "Hohenwarter" beibehalten). -->
+            <div class="praxis-photo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              <span>Foto Therapieraum (Foto: Hohenwarter)</span>
+            </div>
+            <!-- PLATZHALTER-FOTO 2 -->
+            <div class="praxis-photo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              <span>Foto Wartebereich</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path fill="#EDE3CF" d="M0,0 C240,48 480,48 720,24 C960,0 1200,0 1440,28 L1440,0 L0,0 Z"/></svg>
+    </div>
+
+    <!-- ===== Ihr Termin =====
+         Accordion of 6 points; several can be open at once. Text is still placeholder. -->
+    <section class="section section-cream" id="termin">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Praktisches</p>
+          <h2>Ihr Termin</h2>
+          <p>Alles Wichtige vor Ihrem Besuch — tippen Sie auf einen Punkt für die Details.</p>
+        </div>
+
+        <div class="accordion reveal">
+          <div class="accordion-item">
+            <button class="accordion-trigger">Kosten <span class="chev">&#9662;</span></button>
+            <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhaltertext: Preise pro Sitzung, Kassenleistung vs. Selbstzahler, Zahlungsmodalitäten.</p></div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger">Öffnungszeiten <span class="chev">&#9662;</span></button>
+            <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhaltertext: Behandlungszeiten nach Vereinbarung.</p></div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger">Hausbesuche <span class="chev">&#9662;</span></button>
+            <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhaltertext: Informationen zu Hausbesuchen.</p></div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger">Terminvereinbarung <span class="chev">&#9662;</span></button>
+            <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhaltertext: telefonisch unter 0650 60 22 101 oder per E-Mail.</p></div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger">Erster Besuch <span class="chev">&#9662;</span></button>
+            <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhaltertext: Was Sie zum ersten Termin mitbringen und erwarten können.</p></div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger">Anreise <span class="chev">&#9662;</span></button>
+            <div class="accordion-content"><div class="accordion-content-inner"><p>Nordmanngasse 27/3/8, 1210 Wien — erreichbar mit öffentlichen Verkehrsmitteln.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-contact">
+          <div class="footer-brand">
+            <svg width="28" height="28" viewBox="0 0 40 40" aria-hidden="true">
+              <circle cx="20" cy="7" r="4.2" fill="#F6EFDF"/>
+              <path d="M20 13 L13 34 M20 13 L27 34 M20 13 L9 18 M20 13 L31 18" stroke="#F6EFDF" stroke-width="3.6" stroke-linecap="round" fill="none"/>
+            </svg>
+            Physiotherapie Monica Mattenberger
+          </div>
+          <p class="footer-address">
+            Nordmanngasse 27/3/8, 1210 Wien<br>
+            Tel: <a href="tel:+436506022101">0650 60 22 101</a><br>
+            E-Mail: <a href="mailto:[E-Mail-Adresse einfügen]">[E-Mail-Adresse einfügen]</a>
+          </p>
+        </div>
+        <div class="footer-actions">
+          <a class="footer-btn" href="tel:+436506022101">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Anrufen
+          </a>
+          <button class="footer-btn" id="backToTopLink">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            Nach oben
+          </button>
+        </div>
+      </div>
+
+      <!-- Legal text as an accordion (keeps the site's info-display consistent). -->
+      <div class="accordion legal-accordion">
+        <div class="accordion-item">
+          <button class="accordion-trigger">Impressum <span class="chev">&#9662;</span></button>
+          <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhalter: Impressum-Text (in Österreich rechtlich verpflichtend — echter Text vor dem Live-Gang nötig).</p></div></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">Haftungsausschluss <span class="chev">&#9662;</span></button>
+          <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhalter: Haftungsausschluss-Text.</p></div></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">Hinweis zum Urheberrecht <span class="chev">&#9662;</span></button>
+          <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhalter: Urheberrechts-/Copyright-Hinweis.</p></div></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">Datenschutzerklärung <span class="chev">&#9662;</span></button>
+          <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhalter: Datenschutzerklärung (DSGVO).</p></div></div>
+        </div>
+      </div>
+
+      <p class="footer-copy">© 2026 Physiotherapie Monica Mattenberger · Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Nach oben scrollen">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
