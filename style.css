@@ -1,0 +1,918 @@
+/* ============================================================
+   MATTENBERGER SITE — STYLES  (rough draft)
+   ------------------------------------------------------------
+   style.css controls how everything LOOKS. index.html holds the
+   CONTENT. script.js handles the CLICKING (accordions, the
+   therapy expand box, fade-ins, back-to-top, mobile menu).
+   ============================================================ */
+
+/* ---- Master settings (colors + sizes in one place) --------
+   Change a value here and it updates everywhere it's used.
+   Palette is her direction: beige / white / red, with red as
+   the accent and beige+white alternating as section backgrounds. */
+:root {
+  --red:        #C4315E;   /* main accent */
+  --red-deep:   #8E2144;   /* darker red, for hover states */
+  --red-band:   #6E1B31;   /* deep red, used for the footer band */
+  --cream:      #F6EFDF;   /* warm beige, a main background */
+  --beige:      #EDE3CF;   /* a slightly deeper beige, alternate background */
+  --cream-deep: #E7DBC4;   /* borders / hairlines */
+  --white:      #FFFDF9;
+  --ink:        #2B2320;   /* main text (near-black brown) */
+  --ink-soft:   #6B5F58;   /* softer secondary text */
+  --max:        1120px;    /* widest the content stretches */
+}
+
+/* Wipe browser default spacing so our choices are the only ones. */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* scroll-padding-top keeps anchored sections from hiding under the sticky header. */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: 'Karla', sans-serif;
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.65;
+  font-size: 17px;
+}
+
+h1, h2, h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+a { color: var(--red); }
+
+/* Visible outline when navigating by keyboard (accessibility — keep this). */
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+}
+
+/* Respect people who've asked their device to reduce motion. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Reusable content container: centers content, caps its width. */
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Small "eyebrow" label used above headings throughout the site. */
+.eyebrow {
+  color: var(--red);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* ============================================================
+   FADE-IN ON SCROLL
+   Elements with class="reveal" fade up the first time they enter
+   the viewport. script.js adds "is-visible" to trigger it.
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   HEADER  (sticky bar: logo | menu | phone)
+   ============================================================ */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 253, 249, 0.92);
+  backdrop-filter: blur(8px); /* frosted look over content scrolling underneath */
+  border-bottom: 1px solid var(--cream-deep);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.brand-logo {
+  height: 38px;
+  width: auto;
+  display: block;
+}
+
+.brand-name {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.brand-name small {
+  display: block;
+  font-family: 'Karla', sans-serif;
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.nav-cluster {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.nav-links a:hover { color: var(--red); }
+
+/* The red "call now" pill. Shown early / prominently as requested. */
+.phone-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--red);
+  color: var(--white) !important;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+
+.phone-pill:hover { background: var(--red-deep); }
+
+/* Hamburger button — hidden on desktop, shown on mobile (see mobile rules at the bottom). */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  color: var(--ink);
+}
+
+.menu-toggle:hover { background: var(--cream-deep); }
+
+/* ============================================================
+   HERO  (big background image + overlay + fade-in text)
+   This is the "large background image on load" they liked.
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 78vh;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  overflow: hidden;
+  color: var(--white);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* Placeholder: a warm gradient stands in for the real photo.
+     When a hero photo arrives, put it in FRONT of the gradient, e.g.:
+     background: linear-gradient(105deg, rgba(110,27,49,0.7), rgba(196,49,94,0.3)),
+                 url('images/hero.jpg') center/cover no-repeat; */
+  background:
+    linear-gradient(105deg, rgba(110,27,49,0.78) 0%, rgba(142,33,68,0.55) 55%, rgba(196,49,94,0.35) 100%),
+    linear-gradient(135deg, #8E2144, #C4315E);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  padding: 64px 0;
+}
+
+.hero-eyebrow {
+  color: rgba(255,255,255,0.85);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: clamp(40px, 6vw, 66px);
+  margin-bottom: 18px;
+  color: var(--white);
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--cream);
+}
+
+.hero-sub {
+  font-size: clamp(17px, 2.2vw, 20px);
+  color: rgba(255,255,255,0.9);
+  max-width: 46ch;
+  margin-bottom: 30px;
+}
+
+.hero-cta-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Hero fade-in on page load. The d1..d4 classes just stagger the timing. */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeUp 0.9s ease forwards;
+}
+
+.d1 { animation-delay: 0.15s; }
+.d2 { animation-delay: 0.35s; }
+.d3 { animation-delay: 0.55s; }
+.d4 { animation-delay: 0.75s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Buttons — shared base then variants (light-on-dark for the hero, dark-on-light elsewhere). */
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 13px 26px;
+  border-radius: 999px;
+  transition: transform 0.1s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.btn:active { transform: scale(0.98); }
+
+.btn-primary {
+  background: var(--white);
+  color: var(--red-deep);
+}
+
+.btn-primary:hover { background: var(--cream); }
+
+.btn-ghost {
+  border: 2px solid rgba(255,255,255,0.85);
+  color: var(--white);
+}
+
+.btn-ghost:hover { background: rgba(255,255,255,0.14); }
+
+.btn-solid {
+  background: var(--red);
+  color: var(--white);
+}
+
+.btn-solid:hover { background: var(--red-deep); }
+
+.btn-outline {
+  border: 2px solid var(--ink);
+  color: var(--ink);
+}
+
+.btn-outline:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+/* ============================================================
+   WAVE DIVIDERS  (her "waves in background" idea)
+   A thin decorative wave marks the transition between chapters.
+   The SVG fill color is set inline per-use so each wave blends
+   into the section directly above it.
+   ============================================================ */
+.wave-divider {
+  display: block;
+  width: 100%;
+  height: 56px;
+  line-height: 0;
+}
+
+.wave-divider svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================================
+   SECTIONS  (alternating backgrounds = "color per chapter")
+   ============================================================ */
+.section {
+  padding: 76px 0;
+  position: relative;
+}
+
+.section-cream { background: var(--cream); }
+.section-white { background: var(--white); }
+.section-beige { background: var(--beige); }
+
+.section-head {
+  max-width: 660px;
+  margin-bottom: 40px;
+}
+
+.section-head h2 {
+  font-size: clamp(28px, 3.6vw, 40px);
+  margin-bottom: 12px;
+}
+
+.section-head p { color: var(--ink-soft); }
+
+/* ---- Introduction chapter ---- */
+.intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.intro-portrait {
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: 180px 180px 16px 16px;
+  background: var(--white);
+  border: 1px solid var(--cream-deep);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--ink-soft);
+  text-align: center;
+  padding: 20px;
+}
+
+.intro-quote {
+  margin-top: 40px;
+  max-width: 760px;
+}
+
+.intro-quote blockquote {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(20px, 2.6vw, 27px);
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.intro-quote cite {
+  display: block;
+  margin-top: 12px;
+  font-style: normal;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 700;
+}
+
+.lead {
+  color: var(--ink-soft);
+  margin: 14px 0;
+}
+
+/* When you swap a placeholder box for a real <img>, give it the matching
+   helper class so it takes the same size and rounded shape as the box did. */
+.intro-portrait-img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  border-radius: 180px 180px 16px 16px;
+  border: 1px solid var(--cream-deep);
+  display: block;
+}
+
+.praxis-photo-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Quick links down to the other chapters. */
+.chapter-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.chapter-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  border: 1px solid var(--cream-deep);
+  border-radius: 999px;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 15px;
+  transition: border-color 0.15s ease, transform 0.1s ease;
+}
+
+.chapter-link:hover {
+  border-color: var(--red);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   ACCORDION  (Berufliche Erfahrungen, Ihr Termin, legal)
+   The one expandable pattern besides the therapy tiles.
+   Multiple rows may be open at once.
+   ============================================================ */
+.accordion {
+  display: grid;
+  gap: 12px;
+  max-width: 860px;
+}
+
+.intro-accordion { margin-top: 22px; }
+
+.accordion-item {
+  background: var(--white);
+  border: 1px solid var(--cream-deep);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.accordion-trigger {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.accordion-trigger:hover { color: var(--red); }
+
+.accordion-trigger .chev {
+  color: var(--red);
+  font-size: 13px;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.accordion-item.open .accordion-trigger .chev { transform: rotate(180deg); }
+
+/* The open/close height is animated by script.js setting max-height. */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+
+.accordion-content-inner {
+  padding: 0 22px 22px;
+  color: var(--ink-soft);
+}
+
+.accordion-content-inner ul { margin: 10px 0 0 18px; }
+.accordion-content-inner li { margin-bottom: 6px; }
+
+/* ============================================================
+   THERAPIEFORMEN  (tile grid + inline expanding detail box)
+   Click a tile -> a wide detail box opens below its row.
+   Opening another tile closes the first (one open at a time).
+   The wide box is the "horizontal elongated shape" he liked.
+   ============================================================ */
+.therapy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.therapy-card {
+  background: var(--cream);
+  border: 1px solid var(--cream-deep);
+  border-radius: 14px;
+  padding: 22px 20px 18px;
+  text-align: left;
+  color: var(--ink);
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.therapy-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--red);
+}
+
+/* box-shadow (not a thicker border) marks the open tile, so nothing shifts by 1px. */
+.therapy-card.active {
+  border-color: var(--red);
+  box-shadow: 0 0 0 1px var(--red);
+}
+
+/* Small line-icon per therapy (the default "picture" for a tile — see the
+   options page for photo alternatives). */
+.therapy-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(196, 49, 94, 0.10);
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.therapy-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.therapy-card strong {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.therapy-card .therapy-conditions {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+/* margin-top:auto pins "Mehr erfahren" to the bottom so it lines up across tiles
+   even when the condition text runs to different lengths. */
+.therapy-card .therapy-more {
+  color: var(--red);
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.detail-conditions { color: var(--ink) !important; }
+.detail-conditions strong { color: var(--red); }
+
+/* The wide detail box. grid-column: 1/-1 makes it span the full
+   grid width on its own row, which is how it lands under the tile. */
+.therapy-detail-panel {
+  grid-column: 1 / -1;
+  background: var(--white);
+  border: 1px solid var(--red);
+  border-radius: 16px;
+  padding: 28px;
+  display: none;
+}
+
+.therapy-detail-panel.open { display: block; }
+
+.therapy-detail-panel .detail-inner {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.therapy-detail-panel .detail-image {
+  flex: 0 0 300px;
+  max-width: 300px;
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  background: var(--beige);
+  border: 1px dashed var(--cream-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-soft);
+}
+
+.therapy-detail-panel .detail-image svg {
+  width: 34px;
+  height: 34px;
+  opacity: 0.55;
+}
+
+.therapy-detail-panel .detail-text {
+  flex: 1;
+  min-width: 240px;
+}
+
+.therapy-detail-panel h3 {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.therapy-detail-panel p {
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+
+.therapy-detail-panel .detail-close {
+  float: right;
+  border: none;
+  background: var(--cream);
+  color: var(--ink);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  margin: -8px -8px 0 8px;
+}
+
+.therapy-detail-panel .detail-close:hover {
+  background: var(--red);
+  color: var(--white);
+}
+
+/* ---- Die Praxis: two room pictures ---- */
+.praxis-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.praxis-photos {
+  display: grid;
+  gap: 14px;
+}
+
+.praxis-photo {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  background: var(--white);
+  border: 1px dashed var(--cream-deep);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--ink-soft);
+  text-align: center;
+  padding: 16px;
+}
+
+.praxis-photo svg {
+  width: 28px;
+  height: 28px;
+  opacity: 0.55;
+}
+
+.praxis-text p {
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+}
+
+/* ============================================================
+   FOOTER  (deep red band + back-to-top + phone + legal accordion)
+   ============================================================ */
+footer {
+  background: var(--red-band);
+  color: var(--cream);
+  padding: 56px 0 30px;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.footer-contact {
+  display: grid;
+  gap: 12px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+}
+
+.footer-address {
+  font-size: 14px;
+  color: rgba(245,240,232,0.8);
+  line-height: 1.9;
+}
+
+.footer-address a { color: var(--cream); }
+
+.footer-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.footer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.12);
+  color: var(--cream);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 999px;
+  padding: 9px 18px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s ease;
+}
+
+.footer-btn:hover { background: rgba(255,255,255,0.22); }
+
+/* Legal accordion sits on the dark footer, so it gets its own darker styling. */
+.legal-accordion {
+  max-width: 100%;
+  margin-bottom: 30px;
+}
+
+.legal-accordion .accordion-item {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.18);
+}
+
+.legal-accordion .accordion-trigger {
+  color: var(--cream);
+  font-size: 17px;
+}
+
+.legal-accordion .accordion-trigger:hover { color: var(--white); }
+.legal-accordion .accordion-trigger .chev { color: var(--cream); }
+.legal-accordion .accordion-content-inner { color: rgba(245,240,232,0.8); }
+
+.footer-copy {
+  font-size: 13px;
+  color: rgba(245,240,232,0.55);
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 20px;
+}
+
+/* ============================================================
+   BACK-TO-TOP floating button (appears after scrolling down)
+   ============================================================ */
+.to-top {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 60;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: var(--red);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.15s ease;
+  box-shadow: 0 6px 18px rgba(110,27,49,0.35);
+}
+
+.to-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.to-top:hover { background: var(--red-deep); }
+
+/* ============================================================
+   MOBILE  (phones and small tablets)
+   Menu collapses behind the hamburger; phone stays visible.
+   ============================================================ */
+@media (max-width: 860px) {
+  .intro-grid, .praxis-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .praxis-grid .praxis-text { order: -1; } /* text above the photos on mobile */
+}
+
+@media (max-width: 680px) {
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--cream-deep);
+    padding: 6px 24px 14px;
+    display: none;
+  }
+
+  header.nav-open .nav-links { display: flex; }
+
+  .nav-links li { border-top: 1px solid var(--cream-deep); }
+
+  .nav-links a {
+    display: block;
+    padding: 12px 0;
+  }
+
+  .section { padding: 56px 0; }
+
+  .therapy-detail-panel .detail-inner { flex-direction: column; }
+
+  .therapy-detail-panel .detail-image {
+    flex-basis: auto;
+    max-width: 100%;
+    width: 100%;
+  }
+}
