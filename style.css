@@ -94,14 +94,17 @@ a:focus-visible, button:focus-visible {
    FADE-IN ON SCROLL
    Elements with class="reveal" fade up the first time they enter
    the viewport. script.js adds "is-visible" to trigger it.
+   Scoped under .js (see the bootstrap script in <head>) so content
+   stays fully visible by default if JavaScript never runs — e.g.
+   phones previewing an emailed HTML file without executing scripts.
    ============================================================ */
-.reveal {
+.js .reveal {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.reveal.is-visible {
+.js .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -278,8 +281,9 @@ header {
   flex-wrap: wrap;
 }
 
-/* Hero fade-in on page load. The d1..d4 classes just stagger the timing. */
-.fade-up {
+/* Hero fade-in on page load. The d1..d4 classes just stagger the timing.
+   Also scoped under .js — see the note above .reveal. */
+.js .fade-up {
   opacity: 0;
   transform: translateY(24px);
   animation: fadeUp 0.9s ease forwards;
@@ -914,5 +918,26 @@ footer {
     flex-basis: auto;
     max-width: 100%;
     width: 100%;
+  }
+}
+
+/* Narrow phones: brand name + phone pill + hamburger were fighting for
+   room on one row. Drop the "Praxis für Physiotherapie" subtitle, shrink
+   the brand name to one line, and tighten the pill so the phone number
+   (kept fully visible, per her request) has room to breathe. */
+@media (max-width: 420px) {
+  .header-inner { gap: 10px; }
+
+  .brand { gap: 8px; }
+  .brand-logo { height: 32px; }
+  .brand-name { font-size: 15px; white-space: nowrap; }
+  .brand-name small { display: none; }
+
+  .nav-cluster { gap: 10px; }
+
+  .phone-pill {
+    padding: 8px 14px;
+    font-size: 13px;
+    gap: 6px;
   }
 }

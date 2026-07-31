@@ -6,33 +6,312 @@
   <meta name="description" content="Physiotherapie Monica Mattenberger in Wien-Floridsdorf (1210). Individuelle Physiotherapie — Spiraldynamik®, Lymphdrainage, Manuelle Therapie und mehr. Termine nach Vereinbarung.">
   <title>Physiotherapie Monica Mattenberger · 1210 Wien</title>
 
-  <!-- Flips the fade-in/reveal-on-scroll effects on only if JS actually runs.
-       Without this, any viewer that blocks scripts (some phones' inline
-       previews for emailed HTML files, for example) would leave the whole
-       page stuck invisible instead of just showing it without the animation. -->
   <script>document.documentElement.classList.add('js');</script>
 
-  <!-- Fonts: Fraunces (headings) + Karla (body). -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --red: #C4315E;
+      --red-deep: #8E2144;
+      --red-band: #6E1B31;
+      --cream: #F6EFDF;
+      --beige: #EDE3CF;
+      --cream-deep: #E7DBC4;
+      --white: #FFFDF9;
+      --ink: #2B2320;
+      --ink-soft: #6B5F58;
+      --max: 1120px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+    body {
+      font-family: 'Karla', sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.65;
+      font-size: 17px;
+    }
+
+    h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 500; line-height: 1.15; }
+    a { color: var(--red); }
+
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid var(--red);
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    .eyebrow {
+      color: var(--red); font-weight: 700; font-size: 13px;
+      letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 12px;
+    }
+
+    .js .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .js .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255, 253, 249, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--cream-deep);
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 12px 0;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+    .brand-logo { height: 38px; width: auto; display: block; }
+    .brand-name { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 500; line-height: 1.1; }
+    .brand-name small { display: block; font-family: 'Karla', sans-serif; font-size: 11px; color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
+
+    .nav-cluster { display: flex; align-items: center; gap: 22px; }
+    .nav-links { display: flex; align-items: center; gap: 22px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--ink); font-weight: 500; font-size: 15px; }
+    .nav-links a:hover { color: var(--red); }
+
+    .phone-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--red); color: var(--white) !important;
+      padding: 9px 18px; border-radius: 999px;
+      font-weight: 600; font-size: 15px; text-decoration: none; white-space: nowrap;
+      transition: background 0.15s ease;
+    }
+    .phone-pill:hover { background: var(--red-deep); }
+
+    .menu-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      width: 42px; height: 42px; border-radius: 10px; color: var(--ink);
+    }
+    .menu-toggle:hover { background: var(--cream-deep); }
+
+    .hero {
+      position: relative; min-height: 78vh;
+      display: flex; align-items: center;
+      text-align: left; overflow: hidden;
+      color: var(--white);
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        linear-gradient(105deg, rgba(110,27,49,0.78) 0%, rgba(142,33,68,0.55) 55%, rgba(196,49,94,0.35) 100%),
+        linear-gradient(135deg, #8E2144, #C4315E);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 640px; padding: 64px 0; }
+    .hero-eyebrow { color: rgba(255,255,255,0.85); font-weight: 700; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 16px; }
+    .hero h1 { font-size: clamp(40px, 6vw, 66px); margin-bottom: 18px; color: var(--white); }
+    .hero h1 em { font-style: italic; color: var(--cream); }
+    .hero-sub { font-size: clamp(17px, 2.2vw, 20px); color: rgba(255,255,255,0.9); max-width: 46ch; margin-bottom: 30px; }
+    .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .js .fade-up { opacity: 0; transform: translateY(24px); animation: fadeUp 0.9s ease forwards; }
+    .d1 { animation-delay: 0.15s; } .d2 { animation-delay: 0.35s; }
+    .d3 { animation-delay: 0.55s; } .d4 { animation-delay: 0.75s; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    .btn { display: inline-block; text-decoration: none; font-weight: 600; font-size: 16px; padding: 13px 26px; border-radius: 999px; transition: transform 0.1s ease, background 0.15s ease, color 0.15s ease; }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--white); color: var(--red-deep); }
+    .btn-primary:hover { background: var(--cream); }
+    .btn-ghost { border: 2px solid rgba(255,255,255,0.85); color: var(--white); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.14); }
+    .btn-solid { background: var(--red); color: var(--white); }
+    .btn-solid:hover { background: var(--red-deep); }
+    .btn-outline { border: 2px solid var(--ink); color: var(--ink); }
+    .btn-outline:hover { background: var(--ink); color: var(--cream); }
+
+    .wave-divider { display: block; width: 100%; height: 56px; line-height: 0; }
+    .wave-divider svg { display: block; width: 100%; height: 100%; }
+
+    .section { padding: 76px 0; position: relative; }
+    .section-cream { background: var(--cream); }
+    .section-white { background: var(--white); }
+    .section-beige { background: var(--beige); }
+
+    .section-head { max-width: 660px; margin-bottom: 40px; }
+    .section-head h2 { font-size: clamp(28px, 3.6vw, 40px); margin-bottom: 12px; }
+    .section-head p { color: var(--ink-soft); }
+
+    .intro-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); gap: 48px; align-items: center; }
+    .intro-portrait {
+      width: 100%; aspect-ratio: 4/5; border-radius: 180px 180px 16px 16px;
+      background: var(--white); border: 1px solid var(--cream-deep);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 10px; color: var(--ink-soft); text-align: center; padding: 20px;
+    }
+    .intro-quote { margin-top: 40px; max-width: 760px; }
+    .intro-quote blockquote { font-family: 'Fraunces', serif; font-size: clamp(20px, 2.6vw, 27px); font-style: italic; line-height: 1.45; }
+    .intro-quote cite { display: block; margin-top: 12px; font-style: normal; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); font-weight: 700; }
+    .lead { color: var(--ink-soft); margin: 14px 0; }
+
+    .intro-portrait-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 180px 180px 16px 16px; border: 1px solid var(--cream-deep); display: block; }
+    .praxis-photo-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 12px; display: block; }
+
+    .chapter-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+    .chapter-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--white); border: 1px solid var(--cream-deep); border-radius: 999px;
+      padding: 10px 20px; text-decoration: none; color: var(--ink); font-weight: 600; font-size: 15px;
+      transition: border-color 0.15s ease, transform 0.1s ease;
+    }
+    .chapter-link:hover { border-color: var(--red); transform: translateY(-2px); }
+
+    .accordion { display: grid; gap: 12px; max-width: 860px; }
+    .intro-accordion { margin-top: 22px; }
+    .accordion-item { background: var(--white); border: 1px solid var(--cream-deep); border-radius: 12px; overflow: hidden; }
+    .accordion-trigger {
+      width: 100%; text-align: left; border: none; background: none; cursor: pointer;
+      padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      font-family: 'Fraunces', serif; font-size: 19px; font-weight: 500; color: var(--ink);
+    }
+    .accordion-trigger:hover { color: var(--red); }
+    .accordion-trigger .chev { color: var(--red); font-size: 13px; transition: transform 0.2s ease; flex-shrink: 0; }
+    .accordion-item.open .accordion-trigger .chev { transform: rotate(180deg); }
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.25s ease; }
+    .accordion-content-inner { padding: 0 22px 22px; color: var(--ink-soft); }
+    .accordion-content-inner ul { margin: 10px 0 0 18px; }
+    .accordion-content-inner li { margin-bottom: 6px; }
+
+    .therapy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+    .therapy-card {
+      background: var(--cream); border: 1px solid var(--cream-deep); border-radius: 14px;
+      padding: 22px 20px 18px; text-align: left; color: var(--ink); font-family: inherit; cursor: pointer;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+    }
+    .therapy-card:hover { transform: translateY(-3px); border-color: var(--red); }
+    .therapy-card.active { border-color: var(--red); box-shadow: 0 0 0 1px var(--red); }
+
+    .therapy-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(196, 49, 94, 0.10); color: var(--red);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .therapy-icon svg { width: 24px; height: 24px; }
+    .therapy-card strong { font-family: 'Fraunces', serif; font-weight: 500; font-size: 18px; }
+    .therapy-card .therapy-conditions { font-size: 14px; color: var(--ink-soft); }
+    .therapy-card .therapy-more { color: var(--red); font-weight: 600; font-size: 14px; margin-top: auto; padding-top: 6px; }
+    .detail-conditions { color: var(--ink) !important; }
+    .detail-conditions strong { color: var(--red); }
+
+    .therapy-detail-panel {
+      grid-column: 1 / -1;
+      background: var(--white); border: 1px solid var(--red); border-radius: 16px;
+      padding: 28px; display: none;
+    }
+    .therapy-detail-panel.open { display: block; }
+    .therapy-detail-panel .detail-inner { display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
+    .therapy-detail-panel .detail-image {
+      flex: 0 0 300px; max-width: 300px; aspect-ratio: 4/3; border-radius: 12px;
+      background: var(--beige); border: 1px dashed var(--cream-deep);
+      display: flex; align-items: center; justify-content: center; color: var(--ink-soft);
+    }
+    .therapy-detail-panel .detail-image svg { width: 34px; height: 34px; opacity: 0.55; }
+    .therapy-detail-panel .detail-text { flex: 1; min-width: 240px; }
+    .therapy-detail-panel h3 { font-size: 24px; margin-bottom: 12px; }
+    .therapy-detail-panel p { color: var(--ink-soft); margin-bottom: 10px; }
+    .therapy-detail-panel .detail-close {
+      float: right; border: none; background: var(--cream); color: var(--ink);
+      width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 16px; margin: -8px -8px 0 8px;
+    }
+    .therapy-detail-panel .detail-close:hover { background: var(--red); color: var(--white); }
+
+    .praxis-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+    .praxis-photos { display: grid; gap: 14px; }
+    .praxis-photo {
+      width: 100%; aspect-ratio: 4/3; border-radius: 12px;
+      background: var(--white); border: 1px dashed var(--cream-deep);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+      color: var(--ink-soft); text-align: center; padding: 16px;
+    }
+    .praxis-photo svg { width: 28px; height: 28px; opacity: 0.55; }
+    .praxis-text p { color: var(--ink-soft); margin-bottom: 14px; }
+
+    footer { background: var(--red-band); color: var(--cream); padding: 56px 0 30px; }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+    .footer-contact { display: grid; gap: 12px; }
+    .footer-brand { display: flex; align-items: center; gap: 12px; font-family: 'Fraunces', serif; font-size: 20px; }
+    .footer-address { font-size: 14px; color: rgba(245,240,232,0.8); line-height: 1.9; }
+    .footer-address a { color: var(--cream); }
+    .footer-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .footer-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.12); color: var(--cream); border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px; padding: 9px 18px; text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer;
+      font-family: inherit; transition: background 0.15s ease;
+    }
+    .footer-btn:hover { background: rgba(255,255,255,0.22); }
+
+    .legal-accordion { max-width: 100%; margin-bottom: 30px; }
+    .legal-accordion .accordion-item { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.18); }
+    .legal-accordion .accordion-trigger { color: var(--cream); font-size: 17px; }
+    .legal-accordion .accordion-trigger:hover { color: var(--white); }
+    .legal-accordion .accordion-trigger .chev { color: var(--cream); }
+    .legal-accordion .accordion-content-inner { color: rgba(245,240,232,0.8); }
+
+    .footer-copy { font-size: 13px; color: rgba(245,240,232,0.55); border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px; }
+
+    .to-top {
+      position: fixed; right: 22px; bottom: 22px; z-index: 60;
+      width: 48px; height: 48px; border-radius: 50%; border: none; cursor: pointer;
+      background: var(--red); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transform: translateY(10px);
+      transition: opacity 0.2s ease, transform 0.2s ease, background 0.15s ease;
+      box-shadow: 0 6px 18px rgba(110,27,49,0.35);
+    }
+    .to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .to-top:hover { background: var(--red-deep); }
+
+    @media (max-width: 860px) {
+      .intro-grid, .praxis-grid { grid-template-columns: 1fr; gap: 32px; }
+      .praxis-grid .praxis-text { order: -1; }
+    }
+
+    @media (max-width: 680px) {
+      .menu-toggle { display: flex; align-items: center; justify-content: center; }
+      .nav-links {
+        position: absolute; top: 100%; right: 0; left: 0;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: var(--white); border-bottom: 1px solid var(--cream-deep);
+        padding: 6px 24px 14px; display: none;
+      }
+      header.nav-open .nav-links { display: flex; }
+      .nav-links li { border-top: 1px solid var(--cream-deep); }
+      .nav-links a { display: block; padding: 12px 0; }
+      .section { padding: 56px 0; }
+      .therapy-detail-panel .detail-inner { flex-direction: column; }
+      .therapy-detail-panel .detail-image { flex-basis: auto; max-width: 100%; width: 100%; }
+    }
+
+    @media (max-width: 420px) {
+      .header-inner { gap: 10px; }
+      .brand { gap: 8px; }
+      .brand-logo { height: 32px; }
+      .brand-name { font-size: 15px; white-space: nowrap; }
+      .brand-name small { display: none; }
+      .nav-cluster { gap: 10px; }
+      .phone-pill { padding: 8px 14px; font-size: 13px; gap: 6px; }
+    }
+  </style>
 </head>
 <body>
 
-  <!--
-    Single-page site for Physiotherapie Monica Mattenberger.
-    Structure (top to bottom): header, hero, intro, therapy grid, praxis, termin, footer.
-    Editing notes (swapping text/photos) are in README.md.
-    Interactions live in script.js; styling in style.css.
-  -->
-
-  <!-- ===== Header ===== -->
   <header id="siteHeader">
     <div class="wrap header-inner">
       <a class="brand" href="#top">
-        <!-- Placeholder logo. Replace with: <img src="images/logo.svg" alt="Logo" class="brand-logo"> -->
         <svg width="38" height="38" viewBox="0 0 40 40" role="img" aria-label="Logo">
           <circle cx="20" cy="7" r="4.2" fill="#C4315E"/>
           <path d="M20 13 L13 34 M20 13 L27 34 M20 13 L9 18 M20 13 L31 18" stroke="#C4315E" stroke-width="3.6" stroke-linecap="round" fill="none"/>
@@ -48,7 +327,6 @@
           <li><a href="#termin">Ihr Termin</a></li>
         </ul>
 
-        <!-- Phone: shown early and prominently; stays visible on mobile too. -->
         <a class="phone-pill" href="tel:+436506022101">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           0650 60 22 101
@@ -63,8 +341,6 @@
 
   <main id="top">
 
-    <!-- ===== Hero =====
-         Background is a placeholder gradient; see .hero-bg in style.css to use a photo. -->
     <section class="hero">
       <div class="hero-bg"></div>
       <div class="wrap hero-content">
@@ -78,7 +354,6 @@
       </div>
     </section>
 
-    <!-- ===== Intro ===== -->
     <section class="section section-cream" id="intro">
       <div class="wrap">
         <div class="intro-grid reveal">
@@ -87,7 +362,6 @@
             <h2>Monica Mattenberger</h2>
             <p class="lead">Physiotherapeutin seit 2002 nach vierjähriger Ausbildung in der Schweiz, selbstständig in Wien seit 2011. Nach einer genauen Befundung entsteht ein Therapieprogramm, das zu Ihnen passt.</p>
 
-            <!-- Berufliche Erfahrungen = one accordion item (real text). -->
             <div class="accordion intro-accordion">
               <div class="accordion-item">
                 <button class="accordion-trigger">Berufliche Erfahrungen <span class="chev">&#9662;</span></button>
@@ -111,7 +385,6 @@
             </div>
           </div>
 
-          <!-- PLATZHALTER-PORTRÄT: replace this whole box with <img src="images/portrait.jpg" alt="Monica Mattenberger" class="intro-portrait-img"> -->
           <div class="intro-portrait">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
             <span>Platzhalter für Porträtfoto</span>
@@ -129,12 +402,6 @@
       <svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path fill="#F6EFDF" d="M0,0 C240,48 480,48 720,24 C960,0 1200,0 1440,28 L1440,0 L0,0 Z"/></svg>
     </div>
 
-    <!-- ===== Therapieformen =====
-         Tiles show the therapy name + the conditions it treats. Clicking a tile
-         opens the wide detail box below it (script.js handles this). Each tile's
-         detail text lives in its own <template> below. The small icon is the
-         current tile "picture" — see therapy-tile-picture-options.html for the
-         photo alternatives. -->
     <section class="section section-white" id="therapieformen">
       <div class="wrap">
         <div class="section-head reveal">
@@ -285,7 +552,6 @@
       <svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path fill="#FFFDF9" d="M0,28 C240,0 480,0 720,24 C960,48 1200,48 1440,8 L1440,0 L0,0 Z"/></svg>
     </div>
 
-    <!-- ===== Die Praxis ===== -->
     <section class="section section-beige" id="praxis">
       <div class="wrap">
         <div class="praxis-grid reveal">
@@ -296,12 +562,10 @@
             <p>Angeschlossen daran ist ein kleiner Wartebereich mit Kundentoilette.</p>
           </div>
           <div class="praxis-photos">
-            <!-- PLATZHALTER-FOTO 1: replace with <img src="images/therapieraum.jpg" alt="Therapieraum" class="praxis-photo-img"> (Foto-Credit "Hohenwarter" beibehalten). -->
             <div class="praxis-photo">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
               <span>Foto Therapieraum (Foto: Hohenwarter)</span>
             </div>
-            <!-- PLATZHALTER-FOTO 2 -->
             <div class="praxis-photo">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
               <span>Foto Wartebereich</span>
@@ -315,8 +579,6 @@
       <svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path fill="#EDE3CF" d="M0,0 C240,48 480,48 720,24 C960,0 1200,0 1440,28 L1440,0 L0,0 Z"/></svg>
     </div>
 
-    <!-- ===== Ihr Termin =====
-         Accordion of 6 points; several can be open at once. Text is still placeholder. -->
     <section class="section section-cream" id="termin">
       <div class="wrap">
         <div class="section-head reveal">
@@ -356,7 +618,6 @@
 
   </main>
 
-  <!-- ===== Footer ===== -->
   <footer>
     <div class="wrap">
       <div class="footer-top">
@@ -386,7 +647,6 @@
         </div>
       </div>
 
-      <!-- Legal text as an accordion (keeps the site's info-display consistent). -->
       <div class="accordion legal-accordion">
         <div class="accordion-item">
           <button class="accordion-trigger">Impressum <span class="chev">&#9662;</span></button>
@@ -414,6 +674,146 @@
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </button>
 
-  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+      const header = document.getElementById('siteHeader');
+      const menuToggle = document.getElementById('menuToggle');
+
+      menuToggle.addEventListener('click', function () {
+        const isOpen = header.classList.toggle('nav-open');
+        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      document.querySelectorAll('#navLinks a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          header.classList.remove('nav-open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      const accordionItems = document.querySelectorAll('.accordion-item');
+
+      accordionItems.forEach(function (item) {
+        const trigger = item.querySelector('.accordion-trigger');
+        const content = item.querySelector('.accordion-content');
+
+        trigger.addEventListener('click', function () {
+          const isOpen = item.classList.toggle('open');
+          content.style.maxHeight = isOpen ? content.scrollHeight + 'px' : null;
+        });
+      });
+
+      window.addEventListener('resize', function () {
+        document.querySelectorAll('.accordion-item.open .accordion-content').forEach(function (content) {
+          content.style.maxHeight = content.scrollHeight + 'px';
+        });
+      });
+
+      const grid = document.getElementById('therapyGrid');
+      const cards = Array.from(grid.querySelectorAll('.therapy-card'));
+
+      const detailImageIcon =
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+        '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
+
+      const panel = document.createElement('div');
+      panel.className = 'therapy-detail-panel';
+      let activeCard = null;
+
+      function fillPanel(card) {
+        const template = card.querySelector('template');
+        panel.innerHTML = '';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'detail-close';
+        closeBtn.setAttribute('aria-label', 'Schließen');
+        closeBtn.innerHTML = '&#10005;';
+        closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closePanel(); });
+        panel.appendChild(closeBtn);
+
+        const inner = document.createElement('div');
+        inner.className = 'detail-inner';
+
+        const image = document.createElement('div');
+        image.className = 'detail-image';
+        image.innerHTML = detailImageIcon;
+
+        const text = document.createElement('div');
+        text.className = 'detail-text';
+        text.appendChild(template.content.cloneNode(true));
+
+        inner.appendChild(image);
+        inner.appendChild(text);
+        panel.appendChild(inner);
+      }
+
+      function placePanelAfterRowOf(card) {
+        if (panel.parentNode) panel.parentNode.removeChild(panel);
+
+        const rowTop = card.offsetTop;
+        let lastInRow = card;
+        cards.forEach(function (c) {
+          if (Math.abs(c.offsetTop - rowTop) < 2) lastInRow = c;
+        });
+
+        grid.insertBefore(panel, lastInRow.nextSibling);
+      }
+
+      function openPanel(card) {
+        fillPanel(card);
+        placePanelAfterRowOf(card);
+        panel.classList.add('open');
+        cards.forEach(function (c) { c.classList.remove('active'); });
+        card.classList.add('active');
+        activeCard = card;
+      }
+
+      function closePanel() {
+        panel.classList.remove('open');
+        if (panel.parentNode) panel.parentNode.removeChild(panel);
+        cards.forEach(function (c) { c.classList.remove('active'); });
+        activeCard = null;
+      }
+
+      cards.forEach(function (card) {
+        card.addEventListener('click', function () {
+          if (activeCard === card) {
+            closePanel();
+          } else {
+            openPanel(card);
+          }
+        });
+      });
+
+      window.addEventListener('resize', function () {
+        if (activeCard) placePanelAfterRowOf(activeCard);
+      });
+
+      const revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        revealObserver.observe(el);
+      });
+
+      const toTop = document.getElementById('toTop');
+
+      window.addEventListener('scroll', function () {
+        toTop.classList.toggle('show', window.scrollY > 500);
+      });
+
+      function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+      toTop.addEventListener('click', scrollToTop);
+      document.getElementById('backToTopLink').addEventListener('click', scrollToTop);
+
+    });
+  </script>
 </body>
 </html>
