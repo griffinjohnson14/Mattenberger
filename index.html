@@ -12,11 +12,8 @@
        page stuck invisible instead of just showing it without the animation. -->
   <script>document.documentElement.classList.add('js');</script>
 
-  <!-- Fonts: Fraunces (headings) + Karla (body). -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+  <!-- Fonts: Fraunces (headings) + Karla (body) — self-hosted in /fonts,
+       loaded via @font-face in style.css. No Google Fonts request. -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -24,7 +21,6 @@
   <!--
     Single-page site for Physiotherapie Monica Mattenberger.
     Structure (top to bottom): header, hero, intro, therapy grid, praxis, termin, footer.
-    Editing notes (swapping text/photos) are in README.md.
     Interactions live in script.js; styling in style.css.
   -->
 
@@ -32,13 +28,8 @@
   <header id="siteHeader">
     <div class="wrap header-inner">
       <a class="brand" href="#top">
-        <!-- Placeholder logo. Replace with: <img src="images/logo.svg" alt="Logo" class="brand-logo"> -->
-        <svg width="38" height="38" viewBox="0 0 40 40" role="img" aria-label="Logo">
-          <circle cx="20" cy="7" r="4.2" fill="#C4315E"/>
-          <path d="M20 13 L13 34 M20 13 L27 34 M20 13 L9 18 M20 13 L31 18" stroke="#C4315E" stroke-width="3.6" stroke-linecap="round" fill="none"/>
-          <path d="M7 25 C14 20, 26 30, 34 23" stroke="#C4315E" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
-        </svg>
-        <span class="brand-name">Monica Mattenberger<small>Praxis für Physiotherapie</small></span>
+        <img src="images/logo.png" alt="Logo von Physiotherapie Monica Mattenberger" class="brand-logo">
+        <span class="brand-name">Praxis für Physiotherapie<small>Monica Mattenberger</small></span>
       </a>
 
       <div class="nav-cluster">
@@ -51,7 +42,7 @@
         <!-- Phone: shown early and prominently; stays visible on mobile too. -->
         <a class="phone-pill" href="tel:+436506022101">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          0650 60 22 101
+          +43-650-60 22 101
         </a>
 
         <button class="menu-toggle" id="menuToggle" aria-label="Menü öffnen" aria-expanded="false">
@@ -68,9 +59,9 @@
     <section class="hero">
       <div class="hero-bg"></div>
       <div class="wrap hero-content">
-        <p class="hero-eyebrow fade-up d1">Praxis für Physiotherapie · 1210 Wien</p>
+        <p class="hero-eyebrow fade-up d1">Praxis für Physiotherapie Monica Mattenberger · 1210 Wien</p>
         <h1 class="fade-up d2">Bewegung, die <em>wieder gut tut</em>.</h1>
-        <p class="hero-sub fade-up d3">Individuelle Physiotherapie in ruhiger Atmosphäre in Wien-Floridsdorf — abgestimmt auf Ihren Körper und Ihren Alltag.</p>
+        <p class="hero-sub fade-up d3">Individuelle Physiotherapie in ruhiger Atmosphäre in Wien-Floridsdorf — abgestimmt auf Ihren Körper und Ihren Alltag. Nach einer genauen Befundung erstelle ich ein Therapieprogramm, das zu Ihnen passt.</p>
         <div class="hero-cta-row fade-up d4">
           <a class="btn btn-primary" href="#termin">Termin vereinbaren</a>
           <a class="btn btn-ghost" href="#therapieformen">Therapieformen ansehen</a>
@@ -85,42 +76,54 @@
           <div>
             <p class="eyebrow">Willkommen</p>
             <h2>Monica Mattenberger</h2>
-            <p class="lead">Physiotherapeutin seit 2002 nach vierjähriger Ausbildung in der Schweiz, selbstständig in Wien seit 2011. Nach einer genauen Befundung entsteht ein Therapieprogramm, das zu Ihnen passt.</p>
+            <p class="lead">Physiotherapeutin seit 2002 nach vierjähriger Ausbildung in der Schweiz, selbstständig in Wien seit 2011.</p>
 
-            <!-- Berufliche Erfahrungen = one accordion item (real text). -->
+            <!-- Berufliche Erfahrungen = one accordion item (real text, from her PDF). -->
             <div class="accordion intro-accordion">
               <div class="accordion-item">
                 <button class="accordion-trigger">Berufliche Erfahrungen <span class="chev">&#9662;</span></button>
                 <div class="accordion-content">
                   <div class="accordion-content-inner">
-                    <p>Gymnastikpädagogik-Ausbildung an der Gymnastikdiplomschule GDS in Basel (Abschluss 1995). Physiotherapie-Ausbildung in Schinznach Bad, Schweiz (4 Jahre, Abschluss 2002), nostrifiziert in Österreich. Selbstständig in Wien seit 2011.</p>
+                    <p><strong>Ausbildung</strong></p>
                     <ul>
-                      <li>Spezialklinik aarReha, Schinznach Bad — Rehabilitation, Rheumatologie, Osteoporose</li>
-                      <li>Regionalspital La Carità, Locarno — Orthopädie, Medizin, Chirurgie, Neurologie</li>
-                      <li>Fortbildungen u.&nbsp;a. Spiraldynamik®, Craniosacrale Berührung, K-Taping, Lymphdrainage nach Vodder</li>
+                      <li>Physiotherapie-Ausbildung an der <em>Schule für Physiotherapie</em> in Schinznach Bad, Schweiz (Ausbildungsdauer: 4 Jahre, Abschluss 2002), Nostrifikation des schweizerischen Physiotherapie-Diploms in Österreich</li>
+                      <li>Gymnastikpädagogik-Ausbildung an der <em>Gymnastikdiplomschule GDS</em> in Basel (Abschluss 1995)</li>
+                    </ul>
+                    <p><strong>Wichtige berufliche Stationen</strong></p>
+                    <ul>
+                      <li>Selbständige Physiotherapeutin in Wien (seit 2011)</li>
+                      <li>Physiotherapeutin beim Regionalspital <em>La Carità</em> in Locarno, Schweiz (Schwerpunkte: Orthopädie, Medizin, Chirurgie, Neurologie)</li>
+                      <li>Physiotherapeutin bei der Spezialklinik <em>aarReha</em> in Schinznach Bad, Schweiz (Schwerpunkte: Rehabilitation, Rheumatologie und Osteoporose)</li>
+                    </ul>
+                    <p><strong>Zentrale Fortbildungen</strong></p>
+                    <ul>
+                      <li>„Spiraldynamik® Diploma Intermediate" auf Basis zahlreicher Kurse (z.B. Pädiatrie, Fuß, Becken, Überlastungssyndrome am Bein, Schultergürtel, Fachdidaktik)</li>
+                      <li>„Craniosacrale Berührung"</li>
+                      <li>K-Taping &amp; K-Active-Taping Sondertechniken</li>
+                      <li>Lymphdrainage nach Dr. Vodder</li>
+                      <li>Fasziendistorsionsmodell nach Typaldos (FDM)</li>
+                      <li>Atemphysiotherapie</li>
+                      <li>Neuromobilisation (NOI)</li>
+                      <li>Funktionelle Bewegungslehre</li>
+                      <li>Kommunikationskurs nach „Gordon" speziell für medizinisches Personal</li>
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="chapter-links">
-              <a class="chapter-link" href="#therapieformen">Therapieformen &rarr;</a>
-              <a class="chapter-link" href="#praxis">Die Praxis &rarr;</a>
-              <a class="chapter-link" href="#termin">Ihr Termin &rarr;</a>
-            </div>
           </div>
 
-          <!-- PLATZHALTER-PORTRÄT: replace this whole box with <img src="images/portrait.jpg" alt="Monica Mattenberger" class="intro-portrait-img"> -->
-          <div class="intro-portrait">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
-            <span>Platzhalter für Porträtfoto</span>
-          </div>
+          <img src="images/portrait.jpg" alt="Monica Mattenberger, Physiotherapeutin" class="intro-portrait-img">
         </div>
 
         <div class="intro-quote reveal">
           <blockquote>„Ich helfe Ihnen, einen Weg zu mehr Wohlbefinden zu finden. Durch unsere gemeinsame Arbeit werden scheinbar undenkbare Bewegungen zur Realität!"</blockquote>
           <cite>Monica Mattenberger</cite>
+        </div>
+
+        <div class="chapter-links">
+          <a class="chapter-link" href="#praxis">Die Praxis &rarr;</a>
+          <a class="chapter-link" href="#termin">Ihr Termin &rarr;</a>
         </div>
       </div>
     </section>
@@ -130,153 +133,271 @@
     </div>
 
     <!-- ===== Therapieformen =====
-         Tiles show the therapy name + the conditions it treats. Clicking a tile
-         opens the wide detail box below it (script.js handles this). Each tile's
-         detail text lives in its own <template> below. The small icon is the
-         current tile "picture" — see therapy-tile-picture-options.html for the
-         photo alternatives. -->
+         Each tile is a .therapy-tile: a photo + icon + name (option B from
+         her feedback), wrapping a <template> with the full detail text.
+         Clicking a tile expands it in place — script.js does that by
+         building a .tile-detail block inside the same tile and letting it
+         span the row; no separate box appears elsewhere. -->
     <section class="section section-white" id="therapieformen">
       <div class="wrap">
         <div class="section-head reveal">
           <p class="eyebrow">Behandlung</p>
           <h2>Therapieformen</h2>
-          <p>Durch fundierte Ausbildung und laufende Fortbildungen wähle ich maßgeschneidert aus einer Reihe von Methoden. Für weitere Infos auf eine Therapieform klicken.</p>
+          <p>Durch meine fundierte Ausbildung und umfangreiche Fortbildungen kann ich für Sie maßgeschneidert aus einer Reihe von Therapieformen auswählen. Für weitere Infos bitte auf die jeweilige Therapieform klicken.</p>
         </div>
 
         <div class="therapy-grid reveal" id="therapyGrid">
 
-          <button class="therapy-card">
-            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 15a3 3 0 1 0-3-3 5 5 0 1 0 5 5 7 7 0 1 0-7-7"/></svg></span>
-            <strong>Spiraldynamik®</strong>
-            <span class="therapy-conditions">Orthopädische und rheumatologische Erkrankungen, Osteoporose, nach Operationen</span>
-            <span class="therapy-more">Mehr erfahren &rarr;</span>
+          <div class="therapy-tile">
+            <button class="therapy-card">
+              <span class="therapy-photo"><img src="images/spiraldynamik.jpg" alt="Aktivierung der Brustwirbelsäule" loading="lazy"></span>
+              <span class="therapy-card-head">
+                <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 15a3 3 0 1 0-3-3 5 5 0 1 0 5 5 7 7 0 1 0-7-7"/></svg></span>
+                <strong>Spiraldynamik®</strong>
+              </span>
+              <span class="therapy-conditions">Orthopädische und rheumatologische Erkrankungen, Osteoporose, nach Operationen</span>
+              <span class="therapy-more">Mehr erfahren &rarr;</span>
+            </button>
             <template>
               <h3>Spiraldynamik®</h3>
-              <p class="detail-conditions"><strong>Anwendung bei:</strong> Orthopädische und rheumatologische Erkrankungen, Osteoporose, nach Operationen</p>
-              <p>Platzhaltertext: ausführliche Beschreibung der Methode Spiraldynamik® (folgt von der Klientin).</p>
+              <p class="detail-conditions"><strong>Anwendungsbeispiele:</strong> Orthopädische und rheumatologische Erkrankungen, Osteoporose, nach Operationen</p>
+              <p>Das Wissen um anatomisch korrekte Haltung und Bewegung leitet uns hin zum richtigen Gebrauch unseres Körpers. Durch einfache Übungen lernen Sie sehr schnell, dass zum Beispiel Ihre Rückenprobleme stark mit der Stellung Ihrer Beine und Füße zusammenhängt. Nebenbei wird dann in den Übungen für den Rücken auch der Hallux am Großzeh mitbehandelt. Oder dass Schulter-Arm-Probleme immer auch mit Rumpf- und Kopfhaltung zu tun haben.</p>
+              <p>In der Therapie wird Ihnen das falsche im Vergleich mit dem richtigen Bewegungsmuster bewusst gemacht. Dann wird das anatomisch richtige Bewegungsverhalten angebahnt und geübt. Das Ziel ist, neues und richtiges Bewegen im Alltag zu integrieren. Dadurch kommt es zu Erfolgserlebnissen und einer neuen Bewegungsfreude.</p>
+              <p>Spiraldynamik® ist ideal für Menschen, die ihre Gesundheit in die eigenen Hände nehmen wollen. Kommentar einer meiner Patientinnen: „Ich habe gehen gelernt. … In jedem Schritt steckt eine Übung." Ein Freund zu einer Spiraldynamik®-geübten Läuferin: „Du läufst ja mit einer unglaublichen Leichtigkeit!"</p>
+              <p>Weitere Informationen: <a href="https://spiraldynamik.com/de/index.html" target="_blank" rel="noopener">Spiraldynamik®</a></p>
             </template>
-          </button>
+          </div>
 
-          <button class="therapy-card">
-            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span>
-            <strong>Lymphdrainage</strong>
-            <span class="therapy-conditions">Lip-/Lymphödem, nach Krebs und Operationen</span>
-            <span class="therapy-more">Mehr erfahren &rarr;</span>
+          <div class="therapy-tile">
+            <button class="therapy-card">
+              <span class="therapy-photo"><img src="images/lymphdrainage.jpg" alt="Lymphdrainage des Arms" loading="lazy"></span>
+              <span class="therapy-card-head">
+                <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span>
+                <strong>Lymphdrainage</strong>
+              </span>
+              <span class="therapy-conditions">Wasser in den Beinen, Lip-/Lymphödem, nach Operationen</span>
+              <span class="therapy-more">Mehr erfahren &rarr;</span>
+            </button>
             <template>
               <h3>Lymphdrainage</h3>
-              <p class="detail-conditions"><strong>Anwendung bei:</strong> Lip-/Lymphödem, nach Krebs und Operationen</p>
-              <p>Platzhaltertext: ausführliche Beschreibung der manuellen Lymphdrainage.</p>
+              <p class="detail-conditions"><strong>Anwendungsbeispiele:</strong> Wasser in den Beinen, Lip-/Lymphödem, nach Operationen</p>
+              <p>Lymphdrainage ist eine Technik, die stark Heilungsprozesse anregt. Klassischerweise kommt sie in folgenden Bereichen zum Einsatz:</p>
+              <ul>
+                <li>Bei Lymphödemen, also bei sogenanntem „Wasser in den Beinen",</li>
+                <li>nach Operationen, um den Heilungsprozess zu unterstützen,</li>
+                <li>nach (Brust)krebsoperationen,</li>
+                <li>zum Ausleiten von Schlackenstoffen begleitend zu Fastenkuren,</li>
+                <li>bei chronischen Entzündungen der Nasennebenhöhlen.</li>
+              </ul>
+              <p>Die Lymphdrainage ist eine extrem beruhigende und entspannende Technik. Die Griffe sind immer ganz sanfte Streichungen und Drehungen auf der Haut, die die Lymphflüssigkeit anregen, sich zu bewegen. Auf diese Weise wird ein Teil der mobilisierten Lymphe in den Blutstrom eingespeist und letztlich über den Urin ausgeleitet. So erhöht sich das Wohlbefinden und Heilungsprozesse werden gefördert.</p>
+              <p>Weitere Informationen: <a href="http://www.lymphliga.at/" target="_blank" rel="noopener">Österreichische Lymph-Liga</a></p>
             </template>
-          </button>
+          </div>
 
-          <button class="therapy-card">
-            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v6"/><path d="M12 10c-1.6-1.4-5-1-5 2.6 0 3.2.6 6.4 2.6 6.4S12 17 12 14.6"/><path d="M12 10c1.6-1.4 5-1 5 2.6 0 3.2-.6 6.4-2.6 6.4S12 17 12 14.6"/></svg></span>
-            <strong>Atemtherapie</strong>
-            <span class="therapy-conditions">COPD, Post-Covid, Atemfunktionsstörung</span>
-            <span class="therapy-more">Mehr erfahren &rarr;</span>
+          <div class="therapy-tile">
+            <button class="therapy-card">
+              <span class="therapy-photo"><img src="images/atemtherapie.jpg" alt="Aktivierung der Tiefatmung" loading="lazy"></span>
+              <span class="therapy-card-head">
+                <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v6"/><path d="M12 10c-1.6-1.4-5-1-5 2.6 0 3.2.6 6.4 2.6 6.4S12 17 12 14.6"/><path d="M12 10c1.6-1.4 5-1 5 2.6 0 3.2-.6 6.4-2.6 6.4S12 17 12 14.6"/></svg></span>
+                <strong>Atemtherapie</strong>
+              </span>
+              <span class="therapy-conditions">COPD, Post-Covid, Atemfunktionsstörungen</span>
+              <span class="therapy-more">Mehr erfahren &rarr;</span>
+            </button>
             <template>
               <h3>Atemtherapie</h3>
-              <p class="detail-conditions"><strong>Anwendung bei:</strong> COPD, Post-Covid, Atemfunktionsstörung</p>
-              <p>Platzhaltertext: ausführliche Beschreibung der Atemtherapie.</p>
+              <p class="detail-conditions"><strong>Anwendungsbeispiele:</strong> COPD, Post-Covid, Atemfunktionsstörungen</p>
+              <p>Wir atmen ständig, ohne darüber nachzudenken. Atmen ist selbstverständlich – richtiges Atmen nicht unbedingt.</p>
+              <p>Bei Lungenkrankheiten (COPD, nach Covid-Erkrankungen) oder Lungenschädigungen, aber auch bei Atemfunktionsstörungen bieten sich spezifische Übungen aus dem Bereich der Atemphysiotherapie an. Dadurch lässt sich die Atmung sowohl auf willkürliche als auch unwillkürliche Weise beeinflussen.</p>
+              <p>Die Therapie nutzt beide Bereiche, um zumindest den Status quo zu erhalten oder das Atmen dauerhaft zu verbessern.</p>
             </template>
-          </button>
+          </div>
 
-          <button class="therapy-card">
-            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="4.5"/><path d="M5.5 18c2.2-1.3 4.3 1.3 6.5 0s4.3-1.3 6.5 0"/></svg></span>
-            <strong>Craniosacraltherapie</strong>
-            <span class="therapy-conditions">Verspannungen, Schmerzen, Traumata</span>
-            <span class="therapy-more">Mehr erfahren &rarr;</span>
+          <div class="therapy-tile">
+            <button class="therapy-card">
+              <span class="therapy-photo"><img src="images/craniosacral-therapie.jpg" alt="Craniosacral-Behandlung" loading="lazy"></span>
+              <span class="therapy-card-head">
+                <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="4.5"/><path d="M5.5 18c2.2-1.3 4.3 1.3 6.5 0s4.3-1.3 6.5 0"/></svg></span>
+                <strong>Craniosacral-Therapie</strong>
+              </span>
+              <span class="therapy-conditions">Verspannungen, Schmerzen, Traumata</span>
+              <span class="therapy-more">Mehr erfahren &rarr;</span>
+            </button>
             <template>
-              <h3>Craniosacraltherapie</h3>
-              <p class="detail-conditions"><strong>Anwendung bei:</strong> Verspannungen, Schmerzen, Traumata</p>
-              <p>Platzhaltertext: ausführliche Beschreibung der Craniosacraltherapie.</p>
+              <h3>Craniosacral-Therapie</h3>
+              <p class="detail-conditions"><strong>Anwendungsbeispiele:</strong> Verspannungen, Schmerzen, Traumata</p>
+              <p>Diese Therapie ist eine manuelle Behandlungsform, die sich aus der Osteopathie heraus entwickelt hat. Im feinen Pulsieren der Gehirn- und Rückenmarksflüssigkeit lässt sich der craniosacrale Rhythmus erspüren. Da dieser sich im ganzen Bindegewebe ausbreitet, ist er im ganzen Körper tastbar.</p>
+              <p>Für die Behandlung ist die Qualität der rhythmischen Bewegung ausschlaggebend. Durch eine gezielte Therapie kann diese unterstützt und harmonisiert werden. Es können sich Verspannungen und Bewegungseinschränkungen lösen, Schmerzen können reduziert werden.</p>
+              <p>Insgesamt ist dies eine sehr entspannende und beruhigende Therapie.</p>
+              <p>Weitere Informationen: <a href="https://www.cranio-austria.at/craniosacrale-k%C3%B6rperarbeit/" target="_blank" rel="noopener">Cranio-Austria</a></p>
             </template>
-          </button>
+          </div>
 
-          <button class="therapy-card">
-            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="2"/><path d="M12 7v6M12 13l-3.5 4.5M12 13l3.5 4.5M8.5 10h7"/></svg></span>
-            <strong>Funktionelle Bewegungslehre</strong>
-            <span class="therapy-conditions">Orthopädische Erkrankungen (Rücken, Hüfte, Knie, …), Osteoporose, nach Operationen</span>
-            <span class="therapy-more">Mehr erfahren &rarr;</span>
+          <div class="therapy-tile">
+            <button class="therapy-card">
+              <span class="therapy-photo"><img src="images/funktionelle-bewegungslehre.jpg" alt="Aktivierung der Lendenwirbelsäule (LWS)" loading="lazy"></span>
+              <span class="therapy-card-head">
+                <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="2"/><path d="M12 7v6M12 13l-3.5 4.5M12 13l3.5 4.5M8.5 10h7"/></svg></span>
+                <strong>Funktionelle Bewegungslehre</strong>
+              </span>
+              <span class="therapy-conditions">Orthopädische Erkrankungen (Rücken, Hüfte, Knie, …), Osteoporose, nach Operationen</span>
+              <span class="therapy-more">Mehr erfahren &rarr;</span>
+            </button>
             <template>
               <h3>Funktionelle Bewegungslehre</h3>
-              <p class="detail-conditions"><strong>Anwendung bei:</strong> Orthopädische Erkrankungen (Rücken, Hüfte, Knie, …), Osteoporose, nach Operationen</p>
-              <p>Platzhaltertext: ausführliche Beschreibung der Funktionellen Bewegungslehre.</p>
+              <p class="detail-conditions"><strong>Anwendungsbeispiele:</strong> Orthopädische Erkrankungen (Rücken, Hüfte, Knie, …), Osteoporose, nach Operationen</p>
+              <p>Oft bewegen wir uns „unnatürlich", weil wir so einem Schmerz ausweichen können. Der kurzfristige Vorteil wird oft durch langfristige Nachteile erkauft, wie z.B. Haltungsschäden oder Abnützungserscheinungen an Gelenken.</p>
+              <p>Die Methode der funktionellen Bewegungslehre (FBL) dient dazu, wieder eine natürliche, Ressourcen schonende Bewegung in Gang zu bringen.</p>
+              <p>Ein Therapieprogramm wird durch vorgängiges Beobachten und Analysieren des Bewegungsablaufs erstellt. Die eigentliche Therapie ermöglicht durch die geplanten, gezielten Übungen eine neue, harmonischere Bewegung.</p>
             </template>
-          </button>
+          </div>
 
-          <button class="therapy-card">
-            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.6a1.5 1.5 0 0 1 3 0V10m0-1V4.6a1.5 1.5 0 0 1 3 0V10m0-.6V6.2a1.5 1.5 0 0 1 3 0V13a6 6 0 0 1-6 6 6 6 0 0 1-5.2-3l-1.6-2.8a1.5 1.5 0 0 1 2.6-1.5L9 13"/></svg></span>
-            <strong>Manuelle Therapie</strong>
-            <span class="therapy-conditions">Verspannungen, Blockierungen, Schmerzen in Gelenken</span>
-            <span class="therapy-more">Mehr erfahren &rarr;</span>
+          <div class="therapy-tile">
+            <button class="therapy-card">
+              <span class="therapy-photo"><img src="images/manuelle-therapie.jpg" alt="Mobilisierung des Sprunggelenkes" loading="lazy"></span>
+              <span class="therapy-card-head">
+                <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.6a1.5 1.5 0 0 1 3 0V10m0-1V4.6a1.5 1.5 0 0 1 3 0V10m0-.6V6.2a1.5 1.5 0 0 1 3 0V13a6 6 0 0 1-6 6 6 6 0 0 1-5.2-3l-1.6-2.8a1.5 1.5 0 0 1 2.6-1.5L9 13"/></svg></span>
+                <strong>Manuelle Therapie</strong>
+              </span>
+              <span class="therapy-conditions">Verspannungen, Blockierungen, Schmerzen in Gelenken</span>
+              <span class="therapy-more">Mehr erfahren &rarr;</span>
+            </button>
             <template>
               <h3>Manuelle Therapie</h3>
-              <p class="detail-conditions"><strong>Anwendung bei:</strong> Verspannungen, Blockierungen, Schmerzen in Gelenken</p>
-              <p>Platzhaltertext: ausführliche Beschreibung der Manuellen Therapie.</p>
+              <p class="detail-conditions"><strong>Anwendungsbeispiele:</strong> Verspannungen, Blockierungen, Schmerzen in Gelenken</p>
+              <p>Unter Manuelle Therapie fallen diverse Techniken wie</p>
+              <ul>
+                <li>Triggerpunkt-Techniken zum Lösen von Verspannungen,</li>
+                <li>Maitland-Techniken zur Mobilisierung von Gelenken und Lösen von Blockaden,</li>
+                <li>FDM (Faszien-Distorsions-Modell) zum Lösen von verklebten Faszien,</li>
+                <li>Massage-Techniken.</li>
+              </ul>
+              <p>Weitere Informationen: <a href="https://www.oevmpt.at/patienten/maitland-konzept/" target="_blank" rel="noopener">Österreichischer Verein für Manuelle Physiotherapie ÖVMPT</a></p>
             </template>
-          </button>
+          </div>
 
-          <button class="therapy-card">
-            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M12 5c-2.2 0-3.2 1-3.2 1M12 8.2c2.2 0 3.2 1 3.2 1M12 11.4c-2.2 0-3.2 1-3.2 1M12 14.6c2.2 0 3.2 1 3.2 1M12 17.8c-2.2 0-3.2 1-3.2 1"/></svg></span>
-            <strong>Selbstmobilisation nach McKenzie</strong>
-            <span class="therapy-conditions">Bandscheibenvorfall / Hexenschuss</span>
-            <span class="therapy-more">Mehr erfahren &rarr;</span>
+          <div class="therapy-tile">
+            <button class="therapy-card">
+              <span class="therapy-photo"><img src="images/mckenzie.jpg" alt="Schmerzbehandlung" loading="lazy"></span>
+              <span class="therapy-card-head">
+                <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M12 5c-2.2 0-3.2 1-3.2 1M12 8.2c2.2 0 3.2 1 3.2 1M12 11.4c-2.2 0-3.2 1-3.2 1M12 14.6c2.2 0 3.2 1 3.2 1M12 17.8c-2.2 0-3.2 1-3.2 1"/></svg></span>
+                <strong>Selbstmobilisation nach McKenzie</strong>
+              </span>
+              <span class="therapy-conditions">Bandscheibenvorfall / Hexenschuss</span>
+              <span class="therapy-more">Mehr erfahren &rarr;</span>
+            </button>
             <template>
               <h3>Selbstmobilisation nach McKenzie</h3>
-              <p class="detail-conditions"><strong>Anwendung bei:</strong> Bandscheibenvorfall / Hexenschuss</p>
-              <p>Platzhaltertext: ausführliche Beschreibung der McKenzie-Methode.</p>
+              <p class="detail-conditions"><strong>Anwendungsbeispiele:</strong> Bandscheibenvorfall / Hexenschuss</p>
+              <p>Bei einem Bandscheibenvorfall mit oder ohne Ausstrahlungen oder auch bei unspezifischen Schmerzen in der Wirbelsäule kann die Technik nach McKenzie eine effiziente Methode zur Linderung der Schmerzen sein.</p>
+              <p>In der Untersuchung wird nach Positionen und Bewegungen gesucht, mit denen der Patient seine Symptome selbst beeinflussen kann.</p>
+              <p>Die regelmäßige Anwendung dieser Selbstbehandlungsverfahren soll dem Patienten die Möglichkeit geben, sein Problem selbst in den Griff zu bekommen. D.h., es wird eine grösstmögliche Unabhängigkeit vom Therapeuten angestrebt. Dieser hilft dem Patienten durch ergonomische Instruktionen und Haltungskorrekturen, eine nachhaltige Verhaltensänderung zu erlangen.</p>
+              <p>Weitere Informationen: <a href="https://de.mckenzieinstitute.org/f%C3%BCr-patienten/was-ist-die-mckenzie-methode/" target="_blank" rel="noopener">McKenzie Institut</a></p>
             </template>
-          </button>
+          </div>
 
-          <button class="therapy-card">
-            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7c0 5.5 3 9.5 7 9.5s7-4 7-9.5"/><path d="M4.5 7h15"/><path d="M9 7v3.2M15 7v3.2"/></svg></span>
-            <strong>Beckenbodengymnastik</strong>
-            <span class="therapy-conditions">Inkontinenz, Blasenschwäche, Beckenbodensenkung, Hämorrhoiden, Rückenschmerzen</span>
-            <span class="therapy-more">Mehr erfahren &rarr;</span>
+          <div class="therapy-tile">
+            <button class="therapy-card">
+              <span class="therapy-photo"><img src="images/gymnastik.jpg" alt="Monica Mattenberger am Strand, Arme ausgebreitet" loading="lazy"></span>
+              <span class="therapy-card-head">
+                <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7c0 5.5 3 9.5 7 9.5s7-4 7-9.5"/><path d="M4.5 7h15"/><path d="M9 7v3.2M15 7v3.2"/></svg></span>
+                <strong>Beckenboden-Gymnastik</strong>
+              </span>
+              <span class="therapy-conditions">Inkontinenz, Blasenschwäche, Beckenbodensenkung, Hämorrhoiden, Rückenschmerzen</span>
+              <span class="therapy-more">Mehr erfahren &rarr;</span>
+            </button>
             <template>
-              <h3>Beckenbodengymnastik</h3>
-              <p class="detail-conditions"><strong>Anwendung bei:</strong> Inkontinenz, Blasenschwäche, Beckenbodensenkung, Hämorrhoiden, Rückenschmerzen</p>
-              <p>Platzhaltertext: ausführliche Beschreibung der Beckenbodengymnastik.</p>
+              <h3>Beckenboden-Gymnastik</h3>
+              <p class="detail-conditions"><strong>Anwendungsbeispiele:</strong> Inkontinenz, Blasenschwäche, Beckenbodensenkung, Hämorrhoiden, Rückenschmerzen</p>
+              <p>Der Beckenboden ist die Muskulatur, die das Becken wie eine federnde, mehrschichtige Matte nach unten abschließt. Sie steht in engem Zusammenhang mit Rücken- und Bauchmuskulatur. Der Beckenboden stützt die inneren Organe und verhindert ein Abrutschen nach unten. Er steuert u.a. die Funktion der Blase und des Darmes.</p>
+              <p>Der Beckenboden kann mit einfachen Übungen aktiviert werden. Dieser so gestärkte Beckenboden hilft bei</p>
+              <ul>
+                <li>Inkontinenz (Blasenschwäche)</li>
+                <li>Beckenbodensenkung</li>
+                <li>Hämorrhoiden</li>
+                <li>Rückenschmerzen</li>
+              </ul>
+              <p>Weitere Informationen: <a href="https://www.beckenboden-gesellschaft.at/informationen/" target="_blank" rel="noopener">Beckenboden Gesellschaft Österreich</a></p>
             </template>
-          </button>
+          </div>
 
-          <button class="therapy-card">
-            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 4 14h6l-1 7 9-11h-6z"/></svg></span>
-            <strong>Neuromobilisation</strong>
-            <span class="therapy-conditions">Bandscheibenvorfall, Karpaltunnel-Syndrom, unspezifische Schmerzsyndrome</span>
-            <span class="therapy-more">Mehr erfahren &rarr;</span>
+          <div class="therapy-tile">
+            <button class="therapy-card">
+              <span class="therapy-photo"><img src="images/neuromobilisation.jpg" alt="Mobilisierung des Nervus Medianus im Arm" loading="lazy"></span>
+              <span class="therapy-card-head">
+                <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 4 14h6l-1 7 9-11h-6z"/></svg></span>
+                <strong>Neuromobilisation (NOI)</strong>
+              </span>
+              <span class="therapy-conditions">Bandscheibenvorfall, Karpaltunnel-Syndrom, unspezifische Schmerzsyndrome</span>
+              <span class="therapy-more">Mehr erfahren &rarr;</span>
+            </button>
             <template>
-              <h3>Neuromobilisation</h3>
-              <p class="detail-conditions"><strong>Anwendung bei:</strong> Bandscheibenvorfall, Karpaltunnel-Syndrom, unspezifische Schmerzsyndrome</p>
-              <p>Platzhaltertext: ausführliche Beschreibung der Neuromobilisation.</p>
+              <h3>Neuromobilisation (NOI)</h3>
+              <p class="detail-conditions"><strong>Anwendungsbeispiele:</strong> Bandscheibenvorfall, Karpaltunnel-Syndrom, unspezifische Schmerzsyndrome</p>
+              <p>Bei diversen Beschwerden ist oft die gestörte Wechselwirkung eines Nervs und seinen umliegenden Geweben die Schmerzursache.</p>
+              <p>Beispiele hierfür sind</p>
+              <ul>
+                <li>Bandscheibenvorfall (mit Ausstrahlungen ins Bein oder Cervicalsyndrom mit Ausstrahlungen in den Arm),</li>
+                <li>Karpaltunnelsyndrom und</li>
+                <li>unspezifische Schmerzsyndrome in den Gliedmaßen.</li>
+              </ul>
+              <p>Bei einem Bandscheibenvorfall drückt die Bandscheibe auf den Nerv und führt zu einer Entzündung mit einhergehenden Schmerzen.</p>
+              <p>In diesen und ähnlichen Fällen empfiehlt sich oft die Neuromobilisation (NOI). Bei dieser kann durch spezielle Techniken der relevante Nerv bewegt und gedehnt werden, um diesen von Verklebungen mit seinem Umfeld zu lösen. Dadurch lassen sich die Schmerzen dauerhaft lösen.</p>
             </template>
-          </button>
+          </div>
 
-          <button class="therapy-card">
-            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7l12 10M6 17 18 7"/></svg></span>
-            <strong>Kinesio-Taping</strong>
-            <span class="therapy-conditions">Sehnenprobleme, Gelenkschmerzen, Beschwerden beim Sport</span>
-            <span class="therapy-more">Mehr erfahren &rarr;</span>
+          <div class="therapy-tile">
+            <button class="therapy-card">
+              <span class="therapy-photo"><img src="images/kinesio-taping.jpg" alt="Behandlung bei „Tennis-Ellbogen&quot;" loading="lazy"></span>
+              <span class="therapy-card-head">
+                <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7l12 10M6 17 18 7"/></svg></span>
+                <strong>Kinesio-Taping</strong>
+              </span>
+              <span class="therapy-conditions">Sehnenprobleme, Gelenkschmerzen, Beschwerden beim Sport</span>
+              <span class="therapy-more">Mehr erfahren &rarr;</span>
+            </button>
             <template>
               <h3>Kinesio-Taping</h3>
-              <p class="detail-conditions"><strong>Anwendung bei:</strong> Sehnenprobleme, Gelenkschmerzen, Beschwerden beim Sport</p>
-              <p>Platzhaltertext: ausführliche Beschreibung des Kinesio-Tapings.</p>
+              <p class="detail-conditions"><strong>Anwendungsbeispiele:</strong> Sehnenprobleme, Gelenkschmerzen, Beschwerden beim Sport</p>
+              <p>Bei einer Reihe von Beschwerden im Bereich der Muskeln, der Gelenke, der Lymphe und der Nerven erweist sich Kinesio-Taping (kurz K-Taping oder Taping) als eine wertvoll unterstützende Methode.</p>
+              <p>Kinesio-Tape steht frei übersetzt für „bewegliches Hautklebeband". Das Tape wird mit verschiedenen Techniken in mannigfaltigen Formen auf die Haut aufgeklebt. Beispielsweise entspannt oder aktiviert es Muskeln, verbessert die Stabilität und Beweglichkeit von Gelenken, aktiviert das Lymphsystem und reduziert Schmerzen.</p>
+              <p>Kinesio-Taping hat ein sehr breites Anwendungsfeld:</p>
+              <ul>
+                <li>Bei Gelenkschmerzen, z.B. Knieschmerzen, Arthrose am Kniegelenk, ein verstauchter Knöchel,</li>
+                <li>bei Muskelspannungsstörungen, wie z.B. ein verspannter Nacken vom Sitzen im Büro, Schleudertrauma,</li>
+                <li>bei Sehnenproblemen wie Tennisarm, Karpaltunnelsyndrom, Sehnenrissen, Sehnenscheidenentzündungen, Bizepssehnenreizung, Schulterimpingement, Probleme mit der Achillesferse,</li>
+                <li>nach Operationen zur Nachbehandlung entstandener Narben, Entstauung nach Knieoperationen und Blutergüssen,</li>
+                <li>im Sport zur Entlastung von stark belasteten Strukturen wie Muskelgruppen, Gelenken, Sehnen und Bändern sowie nach Muskelfaserrissen,</li>
+                <li>in der Lymphtherapie, z.B. bei der Nachsorge von Brustkrebsoperationen, Entstauung von Lymphödemen,</li>
+                <li>muskuläre Mitbeteiligung bei Migräne und Tinnitus, Menstruationsbeschwerden, Inkontinenz.</li>
+              </ul>
+              <p>Das Tape wird auf die Haut aufgeklebt und wirkt sofort schmerzlindernd, entlastend oder stabilisierend auf die beanspruchte Struktur. Ein längerfristiges muskuläres Aufbautraining oder eine einzuübende Verhaltensänderung kann es nicht ersetzen. Jedoch kann der Einsatz des Tapes während dieser Zeit die Therapie wunderbar unterstützen. Es wirkt gleichsam als Katalysator!</p>
             </template>
-          </button>
+          </div>
 
-          <button class="therapy-card">
-            <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4.5c1.8 0 2.8 2 2.8 5s.2 6-1.8 8-4 1-4-2c0-2 1-3 1-5s.2-6 2-6z"/><circle cx="13.2" cy="6.4" r="0.9"/><circle cx="14.8" cy="8.2" r="0.8"/><circle cx="15.8" cy="10.4" r="0.8"/></svg></span>
-            <strong>Fußtherapie</strong>
-            <span class="therapy-conditions">Fußfehlstellungen, Hallux, Hammerzehe</span>
-            <span class="therapy-more">Mehr erfahren &rarr;</span>
+          <div class="therapy-tile">
+            <button class="therapy-card">
+              <span class="therapy-photo therapy-photo-pending">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              </span>
+              <span class="therapy-card-head">
+                <span class="therapy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4.5c1.8 0 2.8 2 2.8 5s.2 6-1.8 8-4 1-4-2c0-2 1-3 1-5s.2-6 2-6z"/><circle cx="13.2" cy="6.4" r="0.9"/><circle cx="14.8" cy="8.2" r="0.8"/><circle cx="15.8" cy="10.4" r="0.8"/></svg></span>
+                <strong>Fußtherapie</strong>
+              </span>
+              <span class="therapy-conditions">Fußfehlstellungen, Hallux, Hammerzehen</span>
+              <span class="therapy-more">Mehr erfahren &rarr;</span>
+            </button>
             <template>
               <h3>Fußtherapie</h3>
-              <p class="detail-conditions"><strong>Anwendung bei:</strong> Fußfehlstellungen, Hallux, Hammerzehe</p>
-              <p>Platzhaltertext: ausführliche Beschreibung der Fußtherapie.</p>
+              <p class="detail-conditions"><strong>Anwendungsbeispiele:</strong> Fußfehlstellungen, Hallux, Hammerzehen</p>
+              <p>Knickfuß, Senkfuß, Spreizfuß, Hohlfuß, Metatarsalgie und Hallux valgus können starke Schmerzen verursachen. In der Therapie werden die Füße unter Berücksichtigung der gesamten Körperstatik analysiert. In einem weiteren Schritt wird Ihnen das falsche im Vergleich mit dem richtigen Bewegungsmuster bewusst gemacht. Dann wird das anatomisch richtige Bewegungsverhalten angebahnt und geübt. Das Ziel ist, neues und richtiges Bewegen im Alltag zu integrieren. Dadurch kommt es zu Erfolgserlebnissen und einer neuen Bewegungsfreude. Kurz: Happy Feet!</p>
             </template>
-          </button>
+          </div>
 
+        </div>
+
+        <div class="chapter-links">
+          <a class="chapter-link" href="#termin">Ihr Termin &rarr;</a>
         </div>
       </div>
     </section>
@@ -292,20 +413,18 @@
           <div class="praxis-text">
             <p class="eyebrow">Die Praxis</p>
             <h2>Praxisräumlichkeiten</h2>
-            <p>Die Praxis besteht aus einem hellen und ruhig gelegenen Therapieraum mit Spiegelwand und bequemer, beheizbarer Liege.</p>
+            <p>Die Praxis besteht aus einem ruhig gelegenen Therapieraum mit bequemer Liege.</p>
             <p>Angeschlossen daran ist ein kleiner Wartebereich mit Kundentoilette.</p>
           </div>
           <div class="praxis-photos">
-            <!-- PLATZHALTER-FOTO 1: replace with <img src="images/therapieraum.jpg" alt="Therapieraum" class="praxis-photo-img"> (Foto-Credit "Hohenwarter" beibehalten). -->
-            <div class="praxis-photo">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-              <span>Foto Therapieraum (Foto: Hohenwarter)</span>
-            </div>
-            <!-- PLATZHALTER-FOTO 2 -->
-            <div class="praxis-photo">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-              <span>Foto Wartebereich</span>
-            </div>
+            <figure class="praxis-photo-figure">
+              <img src="images/therapieraum.jpg" alt="Therapieraum" class="praxis-photo-img">
+              <figcaption>Therapieraum (Foto: Hohenwarter)</figcaption>
+            </figure>
+            <figure class="praxis-photo-figure">
+              <img src="images/wartebereich.jpg" alt="Wartebereich" class="praxis-photo-img">
+              <figcaption>Wartebereich (Foto: Hohenwarter)</figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -316,39 +435,84 @@
     </div>
 
     <!-- ===== Ihr Termin =====
-         Accordion of 6 points; several can be open at once. Text is still placeholder. -->
+         Accordion of 6 points; several can be open at once. Real text from her PDF. -->
     <section class="section section-cream" id="termin">
       <div class="wrap">
         <div class="section-head reveal">
           <p class="eyebrow">Praktisches</p>
           <h2>Ihr Termin</h2>
-          <p>Alles Wichtige vor Ihrem Besuch — tippen Sie auf einen Punkt für die Details.</p>
+          <p>Alles Wichtige vor Ihrem Besuch — tippen Sie auf einen Punkt für Informationen.</p>
         </div>
 
         <div class="accordion reveal">
           <div class="accordion-item">
             <button class="accordion-trigger">Kosten <span class="chev">&#9662;</span></button>
-            <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhaltertext: Preise pro Sitzung, Kassenleistung vs. Selbstzahler, Zahlungsmodalitäten.</p></div></div>
+            <div class="accordion-content"><div class="accordion-content-inner">
+              <p>60 min = € 96,00<br>45 min = € 72,00<br>30 min = € 48,00<br>Hausbesuch + € 25,00</p>
+              <p>Anteiliger Kostenersatz kann bei Ihrer Krankenkasse angesucht werden, z.B. <a href="http://www.oegk.at" target="_blank" rel="noopener">ÖGK</a>, <a href="http://www.svs.at" target="_blank" rel="noopener">SVS</a>, <a href="http://www.bvaeb.at" target="_blank" rel="noopener">BVA</a>.</p>
+            </div></div>
           </div>
           <div class="accordion-item">
             <button class="accordion-trigger">Öffnungszeiten <span class="chev">&#9662;</span></button>
-            <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhaltertext: Behandlungszeiten nach Vereinbarung.</p></div></div>
+            <div class="accordion-content"><div class="accordion-content-inner">
+              <p>In der Praxis sind übliche Terminfenster:<br>
+              <strong>Montag</strong> von 18:20 bis 21:20,<br>
+              <strong>Dienstag</strong> von 15:00 bis 19:00,<br>
+              <strong>Mittwoch</strong> von 07:00 bis 12:00,<br>
+              <strong>Freitag</strong> von 17:00 bis 19:00</p>
+            </div></div>
           </div>
           <div class="accordion-item">
             <button class="accordion-trigger">Hausbesuche <span class="chev">&#9662;</span></button>
-            <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhaltertext: Informationen zu Hausbesuchen.</p></div></div>
+            <div class="accordion-content"><div class="accordion-content-inner">
+              <p>Hausbesuche nach Anfrage, bevorzugt im 21. und 22. Wiener Gemeindebezirk (1210 Floridsdorf und 1220 Donaustadt).</p>
+            </div></div>
           </div>
           <div class="accordion-item">
             <button class="accordion-trigger">Terminvereinbarung <span class="chev">&#9662;</span></button>
-            <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhaltertext: telefonisch unter 0650 60 22 101 oder per E-Mail.</p></div></div>
+            <div class="accordion-content"><div class="accordion-content-inner">
+              <p>Allgemeine Anfragen und Terminvereinbarungen bitte ausschließlich telefonisch unter <a href="tel:+436506022101">+43-650-60 22 101</a>.</p>
+              <p>Falls Sie mich nicht erreichen, hinterlassen Sie bitte eine kurze Sprach- oder Textnachricht (SMS) mit der Bitte um eine Rückantwort.</p>
+            </div></div>
           </div>
           <div class="accordion-item">
             <button class="accordion-trigger">Erster Besuch <span class="chev">&#9662;</span></button>
-            <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhaltertext: Was Sie zum ersten Termin mitbringen und erwarten können.</p></div></div>
+            <div class="accordion-content"><div class="accordion-content-inner">
+              <p>Ich bin Wahlphysiotherapeutin. Daher brauchen Sie eine ärztliche <strong>Verordnung für Physiotherapie</strong>, die möglicherweise vorab von der Krankenkasse bewilligt werden muss, wenn Sie um eine anteilige Kostenrückerstattung ansuchen wollen.</p>
+              <p>Mehr zur Bewilligung sowie den rückerstattbaren Kostenanteil erfragen Sie bitte bei Ihrer Krankenkasse, z.B. <a href="http://www.oegk.at" target="_blank" rel="noopener">ÖGK</a>, <a href="http://www.svs.at" target="_blank" rel="noopener">SVS</a>, <a href="http://www.bvaeb.at" target="_blank" rel="noopener">BVA</a>.</p>
+            </div></div>
           </div>
           <div class="accordion-item">
             <button class="accordion-trigger">Anreise <span class="chev">&#9662;</span></button>
-            <div class="accordion-content"><div class="accordion-content-inner"><p>Nordmanngasse 27/3/8, 1210 Wien — erreichbar mit öffentlichen Verkehrsmitteln.</p></div></div>
+            <div class="accordion-content"><div class="accordion-content-inner">
+              <p>Die Praxis befindet sich in Wien nahe der Bezirksgrenze zwischen Floridsdorf (21. Bezirk) und Donaustadt (22. Bezirk) direkt an der Verbindungsachse <strong>Donaufelderstraße</strong>, 100 Meter entfernt von der <strong>Haltestelle Fultonstraße</strong> der Straßenbahnlinien 25/26/27.</p>
+              <p><strong><a href="https://www.openstreetmap.org/#map=18/48.25222/16.41532" target="_blank" rel="noopener">Exakter Ort via openstreetmap.org</a></strong></p>
+              <p><a href="https://www.wienerlinien.at/web/wiener-linien/route-planen" target="_blank" rel="noopener">Fahrplan der Wiener Linien</a></p>
+              <p><a href="https://anachb.vor.at/" target="_blank" rel="noopener">Fahrplan zur Anfahrt von außerhalb Wien / mit den Öffis / zu Fuß / mit dem Rad</a></p>
+
+              <p class="anreise-subhead"><em>Erreichbarkeit mit öffentlichen Verkehrsmitteln von der Haltestelle „Fultonstraße"</em></p>
+              <p>Der Ort ist sehr leicht mit öffentlichen Verkehrsmitteln erreichbar. Direkt an der Haltestelle befindet sich südseitig ein kleiner Park mit Spielplatz unter hohen Bäumen. Hinter den Bäumen beginnt die „autofreie Siedlung".</p>
+              <figure class="anreise-photo"><img src="images/anreise-1.jpg" alt="Kleiner Park mit Spielplatz bei der Haltestelle Fultonstraße" loading="lazy"></figure>
+
+              <p>Durch einen 2-stöckigen Durchgang gelangen Sie in deren ersten Innenhof mit Teich.</p>
+              <figure class="anreise-photo"><img src="images/anreise-2.jpg" alt="2-stöckiger Durchgang" loading="lazy"></figure>
+              <figure class="anreise-photo"><img src="images/anreise-3.jpg" alt="Erster Innenhof mit Teich" loading="lazy"></figure>
+
+              <p>Direkt nach dem zweiten Durchgang und hinter dem Teich liegt der Eingang zur Praxis, Tür 27/3/8. Mehrere Schilder weisen auf die Praxis-Räumlichkeiten hin.</p>
+              <figure class="anreise-photo"><img src="images/anreise-4.jpg" alt="Durchgang zu den Innenhöfen" loading="lazy"></figure>
+
+              <p class="anreise-subhead"><em>Erreichbarkeit über die Nordmanngasse mit Fahrrad oder Auto</em></p>
+              <p>Die Praxis ist auch von der Nordmanngasse her zugänglich.</p>
+              <p>Dort ist eine Anreise mit dem <strong>Fahrrad</strong> erleichtert, da die Nordmanngasse am Radwegnetz liegt, durch das Floridsdorf mit Kagran / Donauzentrum über das Donaufeld verbunden ist.</p>
+              <p>Für eine Anreise mit dem <strong>Auto</strong> gibt es diverse öffentliche Parkmöglichkeiten in der Nähe. <em>Wichtig: Parkpickerl-Zone!</em> Auch wenn in Teilen der Nordmanngasse ein Halteverbot besteht, so können doch vorhandene Buchten entlang der Straße zum Ein- und Aussteigen genutzt werden.</p>
+              <figure class="anreise-photo"><img src="images/anreise-5.jpg" alt="Erreichbarkeit über die Nordmanngasse mit Fahrrad oder Auto" loading="lazy"></figure>
+
+              <p>Die Siedlung ist an den roten Balkonverblendungen und den hohen Bäumen davor erkenntlich. Ein breiter Durchgang führt in die Innenhöfe. Nach dem Innenhof mit kleinem Spielplatz kommt auf dem Hauptweg ein zweiter Durchgang, in dem bereits ein erstes Hinweisschild zur Praxis angebracht ist.</p>
+              <figure class="anreise-photo"><img src="images/anreise-6.jpg" alt="Hinweisschild zur Praxis" loading="lazy"></figure>
+
+              <p>Direkt nach dem zweiten Durchgang geht es nach rechts wie auf dem Schild angedeutet.</p>
+              <figure class="anreise-photo"><img src="images/anreise-7.jpg" alt="Therapiepraxis Nordmanngasse 27/3/8" loading="lazy"></figure>
+            </div></div>
           </div>
         </div>
       </div>
@@ -361,23 +525,15 @@
     <div class="wrap">
       <div class="footer-top">
         <div class="footer-contact">
-          <div class="footer-brand">
-            <svg width="28" height="28" viewBox="0 0 40 40" aria-hidden="true">
-              <circle cx="20" cy="7" r="4.2" fill="#F6EFDF"/>
-              <path d="M20 13 L13 34 M20 13 L27 34 M20 13 L9 18 M20 13 L31 18" stroke="#F6EFDF" stroke-width="3.6" stroke-linecap="round" fill="none"/>
-            </svg>
-            Physiotherapie Monica Mattenberger
-          </div>
+          <div class="footer-brand">Praxis für Physiotherapie Monica Mattenberger</div>
           <p class="footer-address">
-            Nordmanngasse 27/3/8, 1210 Wien<br>
-            Tel: <a href="tel:+436506022101">0650 60 22 101</a><br>
-            E-Mail: <a href="mailto:[E-Mail-Adresse einfügen]">[E-Mail-Adresse einfügen]</a>
+            Nordmanngasse 27/3/8, 1210 Wien
           </p>
         </div>
         <div class="footer-actions">
           <a class="footer-btn" href="tel:+436506022101">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            Anrufen
+            +43-650-60 22 101
           </a>
           <button class="footer-btn" id="backToTopLink">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
@@ -386,27 +542,62 @@
         </div>
       </div>
 
-      <!-- Legal text as an accordion (keeps the site's info-display consistent). -->
+      <!-- Legal text as an accordion (keeps the site's info-display consistent). Real text from her PDF. -->
       <div class="accordion legal-accordion">
         <div class="accordion-item">
           <button class="accordion-trigger">Impressum <span class="chev">&#9662;</span></button>
-          <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhalter: Impressum-Text (in Österreich rechtlich verpflichtend — echter Text vor dem Live-Gang nötig).</p></div></div>
+          <div class="accordion-content"><div class="accordion-content-inner">
+            <p><strong>Information gemäß §5 E-Commerce Gesetz und Offenlegung gemäß § 25 Mediengesetz</strong></p>
+            <p><strong>DiensteanbieterIn und MedieninhaberIn:</strong> Monica Mattenberger</p>
+            <p><strong>Praxisname:</strong> Physiotherapie Monica Mattenberger</p>
+            <p><strong>Anschrift:</strong> Nordmanngasse 27/3/8; 1210 Wien; Österreich</p>
+            <p><strong>Telefon:</strong> <a href="tel:+436506022101">+43-650-60 22 101</a></p>
+            <p><strong>E-Mail:</strong> <a href="mailto:office@mattenberger.at">office@mattenberger.at</a> (bitte keine Terminanfragen)</p>
+            <p><strong>Internet:</strong> www.mattenberger.at</p>
+            <p><strong>Berufsbezeichnung:</strong> Physiotherapeutin</p>
+            <p><strong>Wahltherapeutin:</strong> keine Kassenverträge</p>
+            <p><strong>Aufsichtsbehörde:</strong> a) Hygieneüberprüfung des Berufssitzes gem. § 8 MTD-G: zuständige Magistratsabteilung in Wien: 15 – Fachbereich Aufsicht und Qualitätssicherung – Team Gesundheitsberufe, b) Prüfung der Berufsberechtigung und Registrierung nach dem Gesundheitsberuferegister-Gesetz (GBRG): Gesundheit Österreich GmbH.</p>
+            <p><strong>Zuständiger Berufsverband:</strong> <a href="http://www.physioaustria.at/" target="_blank" rel="noopener">Physio Austria</a>, Bundesverband der PhysiotherapeutInnen Österreichs</p>
+            <p><strong>Zur Registrierung nach Gesundheitsberuferegister-Gesetz (GBRG) zuständige Behörde:</strong> Gesundheit Österreich GmbH / 19-GBR-169337 / 04.07.2019</p>
+            <p><strong>Zugehörigkeit zur Berufsvertretung:</strong> Mitglied bei Physio Austria</p>
+            <p>Die Tätigkeit unterliegt dem <a href="http://www.ris.bka.gv.at/bgbl/" target="_blank" rel="noopener">MTD-Gesetz</a> (BGBlNr. 460/1992 in der geltenden Fassung).</p>
+          </div></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-trigger">Haftungsausschluss <span class="chev">&#9662;</span></button>
-          <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhalter: Haftungsausschluss-Text.</p></div></div>
+          <div class="accordion-content"><div class="accordion-content-inner">
+            <p>Der Betreiber dieser Webseite erstellt alle Informationen auf dieser Webseite mit großer Sorgfalt und ist darum bemüht, Aktualität, Korrektheit und Vollständigkeit sicher zu stellen. Alle Informationen dieser Webseite werden ohne Anspruch auf Richtigkeit, Vollständigkeit oder Aktualität zur Verfügung gestellt. Alle Inhalte sind zur allgemeinen Information bestimmt, ersetzen jedoch keine ärztliche/physiotherapeutische Behandlung und stellen keine geschäftliche, rechtliche oder sonstige Beratungsdienstleistung dar.</p>
+            <p>Diese Webseite kann Links zu externen Webseiten enthalten, für deren Inhalte der Betreiber dieser Webseite jedoch keine wie immer geartete Verantwortung oder Haftung übernimmt. Für Internetseiten Dritter, auf die diese Webseite durch Links verweist, tragen die jeweiligen Betreiber die Verantwortung. Des Weiteren kann die Webseite ohne Wissen des Betreibers von anderen Seiten mittels Links verlinkt werden. Der Betreiber übernimmt keine wie immer geartete Haftung und Verantwortung für fremde Websites, von denen durch Links bzw. Hyperlinks auf diese Website verwiesen wird.</p>
+            <p>Für die auf dieser Webseite gesetzten Links zu Webseiten Dritter und fremde Inhalte ist der Betreiber nur dann verantwortlich, wenn von ihnen (d. h. auch von einem rechtswidrigen oder strafbaren Inhalt) positive Kenntnis vorliegt und es technisch möglich und zumutbar ist, deren Nutzung zu verhindern. Der Betreiber ist nach dem E-Commerce-Gesetz jedoch nicht verpflichtet, die fremden Inhalte ständig zu überprüfen. Sollten Sie auf dieser Webseite oder auf solchen, auf die verwiesen/verlinkt wird, bedenkliche oder rechtswidrige Inhalte feststellen, ist der Betreiber für einen entsprechenden Hinweis dankbar.</p>
+          </div></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-trigger">Hinweis zum Urheberrecht <span class="chev">&#9662;</span></button>
-          <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhalter: Urheberrechts-/Copyright-Hinweis.</p></div></div>
+          <div class="accordion-content"><div class="accordion-content-inner">
+            <p>Die Inhalte der Website sind urheberrechtlich geschützt und nur für die persönliche Verwendung bestimmt. Jede den Bestimmungen des Urheberrechtsgesetzes widersprechende Verwendung von Inhalten dieser Website ohne ausdrückliche vorherige Zustimmung des Betreibers ist untersagt. Jede weitergehende Nutzung, insbesondere die Speicherung in Datenbanken, Vervielfältigung und jede Form von gewerblicher Nutzung sowie die Weitergabe an Dritte – auch in Teilen oder in überarbeiteter Form – ohne Zustimmung des Betreibers ist untersagt.</p>
+            <p>Soweit nicht anders angegeben, liegen die Urheber- und Nutzungsrechte (Copyright) für Texte, Abbildungen, Grafiken, Bilder, Design und Quellcode dieser Webseite bei der Betreiberin dieser Webseite. Sie zeichnet verantwortlich für Inhalt, Webdesign und Implementierung dieser Webseite.</p>
+          </div></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-trigger">Datenschutzerklärung <span class="chev">&#9662;</span></button>
-          <div class="accordion-content"><div class="accordion-content-inner"><p>Platzhalter: Datenschutzerklärung (DSGVO).</p></div></div>
+          <div class="accordion-content"><div class="accordion-content-inner">
+            <p><strong>Datenerfassung beim Besuch dieser Website</strong></p>
+            <p>Bei der bloß informatorischen Nutzung unserer Website, also wenn Sie sich nicht registrieren oder uns anderweitig Informationen übermitteln, erheben wir (Medieninhaberin bzw. Provider) nur solche Daten, die Ihr Browser an unseren Server übermittelt (sog. „Server-Logfiles"). Wenn Sie unsere Website aufrufen, erheben wir die folgenden Daten, die für uns technisch erforderlich sind, um Ihnen die Website anzuzeigen:</p>
+            <ul>
+              <li>Unsere besuchte Website-URL</li>
+              <li>Datum und Uhrzeit zum Zeitpunkt des Zugriffes</li>
+              <li>Menge der gesendeten Daten in Byte</li>
+              <li>Quelle/Verweis, von welchem Sie auf die Seite gelangten</li>
+              <li>Verwendeter Browser</li>
+              <li>Verwendetes Betriebssystem</li>
+              <li>Verwendete IP-Adresse (ggf.: in anonymisierter Form)</li>
+            </ul>
+            <p>Die Verarbeitung erfolgt gemäß Art. 6 Abs. 1 lit. f DSGVO auf Basis unseres berechtigten Interesses an der Verbesserung der Stabilität und Funktionalität unserer Website. Eine Weitergabe oder anderweitige Verwendung der Daten findet nicht statt. Wir behalten uns allerdings vor, die Server-Logfiles nachträglich zu überprüfen, sollten konkrete Anhaltspunkte auf eine rechtswidrige Nutzung hinweisen.</p>
+          </div></div>
         </div>
       </div>
 
-      <p class="footer-copy">© 2026 Physiotherapie Monica Mattenberger · Alle Rechte vorbehalten.</p>
+      <p class="footer-copy">© 2026 Praxis für Physiotherapie Monica Mattenberger</p>
     </div>
   </footer>
 

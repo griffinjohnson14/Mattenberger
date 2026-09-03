@@ -1,10 +1,10 @@
-/* ============================================================
+/* =============================================================================
    MATTENBERGER SITE — STYLES  (rough draft)
-   ------------------------------------------------------------
-   style.css controls how everything LOOKS. index.html holds the
-   CONTENT. script.js handles the CLICKING (accordions, the
-   therapy expand box, fade-ins, back-to-top, mobile menu).
-   ============================================================ */
+   -----------------------------------------------------------------------------
+   style.css controls how everything LOOKS. index.html holds the CONTENT.
+   script.js handles the CLICKING (accordions, the therapy expand box, fade-ins,
+   back-to-top, mobile menu).
+   ============================================================================= */
 
 /* ---- Master settings (colors + sizes in one place) --------
    Change a value here and it updates everywhere it's used.
@@ -21,6 +21,28 @@
   --ink:        #2B2320;   /* main text (near-black brown) */
   --ink-soft:   #6B5F58;   /* softer secondary text */
   --max:        1120px;    /* widest the content stretches */
+  --teal:       #5DBFBC;   /* the logo's actual green-blue, sampled from the real file — decorative use */
+  --teal-deep:  #1B6E6A;   /* darkened for text on cream/white — the raw teal above is too light to pass contrast */
+}
+
+/* Self-hosted, so nothing calls out to Google Fonts. Both files are the
+   "latin" subset only (covers German incl. umlauts/ß) pulled from a
+   variable-font build, so one file each covers the whole weight range
+   we use — see /fonts. */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('fonts/fraunces-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('fonts/karla-latin.woff2') format('woff2');
 }
 
 /* Wipe browser default spacing so our choices are the only ones. */
@@ -49,6 +71,11 @@ h1, h2, h3 {
   font-weight: 500;
   line-height: 1.15;
 }
+
+/* One size for every h2 on the page, whether or not it's wrapped in .section-head
+   — Praxisräumlichkeiten and Monica Mattenberger are h2s too and were falling back
+   to the browser default, much smaller than their siblings. */
+h2 { font-size: clamp(28px, 3.6vw, 40px); }
 
 a { color: var(--red); }
 
@@ -90,14 +117,14 @@ a:focus-visible, button:focus-visible {
   margin-bottom: 12px;
 }
 
-/* ============================================================
+/* =============================================================================
    FADE-IN ON SCROLL
-   Elements with class="reveal" fade up the first time they enter
-   the viewport. script.js adds "is-visible" to trigger it.
-   Scoped under .js (see the bootstrap script in <head>) so content
-   stays fully visible by default if JavaScript never runs — e.g.
-   phones previewing an emailed HTML file without executing scripts.
-   ============================================================ */
+   Elements with class="reveal" fade up the first time they enter the viewport.
+   script.js adds "is-visible" to trigger it. Scoped under .js (see the
+   bootstrap script in <head>) so content stays fully visible by default if
+   JavaScript never runs — e.g. phones previewing an emailed HTML file without
+   executing scripts.
+   ============================================================================= */
 .js .reveal {
   opacity: 0;
   transform: translateY(28px);
@@ -109,9 +136,9 @@ a:focus-visible, button:focus-visible {
   transform: translateY(0);
 }
 
-/* ============================================================
+/* =============================================================================
    HEADER  (sticky bar: logo | menu | phone)
-   ============================================================ */
+   ============================================================================= */
 header {
   position: sticky;
   top: 0;
@@ -133,6 +160,7 @@ header {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0; /* lets the name shrink/wrap instead of forcing the header wider than the window */
   text-decoration: none;
   color: var(--ink);
 }
@@ -164,12 +192,14 @@ header {
   display: flex;
   align-items: center;
   gap: 22px;
+  min-width: 0;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
   gap: 22px;
+  min-width: 0;
   list-style: none;
 }
 
@@ -214,10 +244,10 @@ header {
 
 .menu-toggle:hover { background: var(--cream-deep); }
 
-/* ============================================================
+/* =============================================================================
    HERO  (big background image + overlay + fade-in text)
    This is the "large background image on load" they liked.
-   ============================================================ */
+   ============================================================================= */
 .hero {
   position: relative;
   min-height: 78vh;
@@ -345,12 +375,12 @@ header {
   color: var(--cream);
 }
 
-/* ============================================================
+/* =============================================================================
    WAVE DIVIDERS  (her "waves in background" idea)
-   A thin decorative wave marks the transition between chapters.
-   The SVG fill color is set inline per-use so each wave blends
-   into the section directly above it.
-   ============================================================ */
+   A thin decorative wave marks the transition between chapters. The SVG fill
+   color is set inline per-use so each wave blends into the section directly
+   above it.
+   ============================================================================= */
 .wave-divider {
   display: block;
   width: 100%;
@@ -364,9 +394,9 @@ header {
   height: 100%;
 }
 
-/* ============================================================
+/* =============================================================================
    SECTIONS  (alternating backgrounds = "color per chapter")
-   ============================================================ */
+   ============================================================================= */
 .section {
   padding: 76px 0;
   position: relative;
@@ -381,10 +411,7 @@ header {
   margin-bottom: 40px;
 }
 
-.section-head h2 {
-  font-size: clamp(28px, 3.6vw, 40px);
-  margin-bottom: 12px;
-}
+.section-head h2 { margin-bottom: 12px; }
 
 .section-head p { color: var(--ink-soft); }
 
@@ -394,22 +421,6 @@ header {
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
   gap: 48px;
   align-items: center;
-}
-
-.intro-portrait {
-  width: 100%;
-  aspect-ratio: 4/5;
-  border-radius: 180px 180px 16px 16px;
-  background: var(--white);
-  border: 1px solid var(--cream-deep);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  color: var(--ink-soft);
-  text-align: center;
-  padding: 20px;
 }
 
 .intro-quote {
@@ -431,7 +442,7 @@ header {
   font-size: 13px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--teal-deep); /* the one spot we tried the logo's second color — see note in chat */
   font-weight: 700;
 }
 
@@ -487,11 +498,11 @@ header {
   transform: translateY(-2px);
 }
 
-/* ============================================================
+/* =============================================================================
    ACCORDION  (Berufliche Erfahrungen, Ihr Termin, legal)
-   The one expandable pattern besides the therapy tiles.
-   Multiple rows may be open at once.
-   ============================================================ */
+   The one expandable pattern besides the therapy tiles. Multiple rows may be
+   open at once.
+   ============================================================================= */
 .accordion {
   display: grid;
   gap: 12px;
@@ -550,21 +561,47 @@ header {
 .accordion-content-inner ul { margin: 10px 0 0 18px; }
 .accordion-content-inner li { margin-bottom: 6px; }
 
-/* ============================================================
-   THERAPIEFORMEN  (tile grid + inline expanding detail box)
-   Click a tile -> a wide detail box opens below its row.
-   Opening another tile closes the first (one open at a time).
-   The wide box is the "horizontal elongated shape" he liked.
-   ============================================================ */
+.accordion-content-inner p { margin-bottom: 10px; }
+.accordion-content-inner p:last-child { margin-bottom: 0; }
+
+/* Anreise: sub-headings between the two route descriptions, and the
+   walking-route photo gallery interspersed in the text. */
+.anreise-subhead {
+  margin-top: 20px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.anreise-photo { margin: 4px 0 14px; }
+
+.anreise-photo img {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
+/* =============================================================================
+   THERAPIEFORMEN  (tile grid; a tile expands in place when clicked)
+   .therapy-tile is the grid cell. Compact state shows the .therapy-card button;
+   clicking it builds a .tile-detail block as its sibling, hides the button, and
+   lets the tile span the full grid row (grid-column:1/-1) so it reads as the
+   same tile growing, not a new box appearing. Clicking the X, or clicking
+   another tile, collapses it again.
+   ============================================================================= */
 .therapy-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
 }
 
+.therapy-tile.expanded { grid-column: 1 / -1; }
+.therapy-tile.expanded .therapy-card { display: none; }
+
 .therapy-card {
+  width: 100%;
+  height: 100%; /* fills the grid cell, which the grid already stretches to match the row's tallest tile — keeps every card in a row the same height */
   background: var(--cream);
-  border: 1px solid var(--cream-deep);
+  border: 2px solid var(--cream-deep);
   border-radius: 14px;
   padding: 22px 20px 18px;
   text-align: left;
@@ -582,17 +619,45 @@ header {
   border-color: var(--red);
 }
 
-/* box-shadow (not a thicker border) marks the open tile, so nothing shifts by 1px. */
-.therapy-card.active {
-  border-color: var(--red);
-  box-shadow: 0 0 0 1px var(--red);
+/* The picture placeholder — "option B" from her feedback. 4:3 keeps it
+   compact at typical tile widths; swap in a real photo via the same
+   aspect-ratio + object-fit:cover as .praxis-photo-img. */
+.therapy-photo {
+  aspect-ratio: 4/3;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--beige);
+  border: 1px dashed var(--cream-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-soft);
 }
 
-/* Small line-icon per therapy (the default "picture" for a tile — see the
-   options page for photo alternatives). */
+.therapy-photo svg {
+  width: 26px;
+  height: 26px;
+  opacity: 0.55;
+}
+
+.therapy-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.therapy-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Small line-icon per therapy, now a secondary mark next to the name
+   rather than the tile's only picture. */
 .therapy-icon {
-  width: 44px;
-  height: 44px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: rgba(196, 49, 94, 0.10);
   color: var(--red);
@@ -603,19 +668,21 @@ header {
 }
 
 .therapy-icon svg {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
 }
 
 .therapy-card strong {
   font-family: 'Fraunces', serif;
   font-weight: 500;
   font-size: 18px;
+  overflow-wrap: break-word; /* safety net for long compound names beyond the two we already hyphenated */
 }
 
 .therapy-card .therapy-conditions {
   font-size: 14px;
   color: var(--ink-soft);
+  min-height: 5em; /* reserves room for the longest condition list (~3 lines) so short ones don't leave the card visibly shorter */
 }
 
 /* margin-top:auto pins "Mehr erfahren" to the bottom so it lines up across tiles
@@ -631,31 +698,30 @@ header {
 .detail-conditions { color: var(--ink) !important; }
 .detail-conditions strong { color: var(--red); }
 
-/* The wide detail box. grid-column: 1/-1 makes it span the full
-   grid width on its own row, which is how it lands under the tile. */
-.therapy-detail-panel {
-  grid-column: 1 / -1;
+/* The expanded tile's detail content. Position:relative + an absolutely-placed X
+   keeps the close button clear of the text regardless of how long the detail copy runs. */
+.tile-detail {
+  position: relative;
   background: var(--white);
-  border: 1px solid var(--red);
+  border: 2px solid var(--red);
   border-radius: 16px;
-  padding: 28px;
-  display: none;
+  padding: 24px;
 }
 
-.therapy-detail-panel.open { display: block; }
-
-.therapy-detail-panel .detail-inner {
+.tile-detail .detail-inner {
   display: flex;
-  gap: 28px;
+  gap: 24px;
   align-items: flex-start;
   flex-wrap: wrap;
+  padding-right: 36px;
 }
 
-.therapy-detail-panel .detail-image {
-  flex: 0 0 300px;
-  max-width: 300px;
+.tile-detail .detail-image {
+  flex: 0 0 260px;
+  max-width: 260px;
   aspect-ratio: 4/3;
   border-radius: 12px;
+  overflow: hidden;
   background: var(--beige);
   border: 1px dashed var(--cream-deep);
   display: flex;
@@ -664,41 +730,49 @@ header {
   color: var(--ink-soft);
 }
 
-.therapy-detail-panel .detail-image svg {
-  width: 34px;
-  height: 34px;
+.tile-detail .detail-image svg {
+  width: 32px;
+  height: 32px;
   opacity: 0.55;
 }
 
-.therapy-detail-panel .detail-text {
+.tile-detail .detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tile-detail .detail-text {
   flex: 1;
-  min-width: 240px;
+  min-width: 220px;
 }
 
-.therapy-detail-panel h3 {
-  font-size: 24px;
-  margin-bottom: 12px;
+.tile-detail h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
 }
 
-.therapy-detail-panel p {
+.tile-detail p {
   color: var(--ink-soft);
   margin-bottom: 10px;
 }
 
-.therapy-detail-panel .detail-close {
-  float: right;
+.tile-detail .detail-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
   border: none;
   background: var(--cream);
   color: var(--ink);
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 16px;
-  margin: -8px -8px 0 8px;
+  font-size: 15px;
 }
 
-.therapy-detail-panel .detail-close:hover {
+.tile-detail .detail-close:hover {
   background: var(--red);
   color: var(--white);
 }
@@ -706,7 +780,7 @@ header {
 /* ---- Die Praxis: two room pictures ---- */
 .praxis-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   gap: 40px;
   align-items: center;
 }
@@ -716,26 +790,13 @@ header {
   gap: 14px;
 }
 
-.praxis-photo {
-  width: 100%;
-  aspect-ratio: 4/3;
-  border-radius: 12px;
-  background: var(--white);
-  border: 1px dashed var(--cream-deep);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
+.praxis-photo-figure { margin: 0; }
+
+.praxis-photo-figure figcaption {
+  margin-top: 8px;
+  font-size: 13px;
   color: var(--ink-soft);
   text-align: center;
-  padding: 16px;
-}
-
-.praxis-photo svg {
-  width: 28px;
-  height: 28px;
-  opacity: 0.55;
 }
 
 .praxis-text p {
@@ -743,9 +804,9 @@ header {
   margin-bottom: 14px;
 }
 
-/* ============================================================
+/* =============================================================================
    FOOTER  (deep red band + back-to-top + phone + legal accordion)
-   ============================================================ */
+   ============================================================================= */
 footer {
   background: var(--red-band);
   color: var(--cream);
@@ -764,12 +825,10 @@ footer {
 .footer-contact {
   display: grid;
   gap: 12px;
+  min-width: 0;
 }
 
 .footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
   font-family: 'Fraunces', serif;
   font-size: 20px;
 }
@@ -779,8 +838,6 @@ footer {
   color: rgba(245,240,232,0.8);
   line-height: 1.9;
 }
-
-.footer-address a { color: var(--cream); }
 
 .footer-actions {
   display: flex;
@@ -834,9 +891,9 @@ footer {
   padding-top: 20px;
 }
 
-/* ============================================================
+/* =============================================================================
    BACK-TO-TOP floating button (appears after scrolling down)
-   ============================================================ */
+   ============================================================================= */
 .to-top {
   position: fixed;
   right: 22px;
@@ -867,10 +924,10 @@ footer {
 
 .to-top:hover { background: var(--red-deep); }
 
-/* ============================================================
+/* =============================================================================
    MOBILE  (phones and small tablets)
    Menu collapses behind the hamburger; phone stays visible.
-   ============================================================ */
+   ============================================================================= */
 @media (max-width: 860px) {
   .intro-grid, .praxis-grid {
     grid-template-columns: 1fr;
@@ -912,25 +969,27 @@ footer {
 
   .section { padding: 56px 0; }
 
-  .therapy-detail-panel .detail-inner { flex-direction: column; }
+  .tile-detail .detail-inner { flex-direction: column; }
 
-  .therapy-detail-panel .detail-image {
+  .tile-detail .detail-image {
     flex-basis: auto;
     max-width: 100%;
     width: 100%;
   }
 }
 
-/* Narrow phones: brand name + phone pill + hamburger were fighting for
-   room on one row. Drop the "Praxis für Physiotherapie" subtitle, shrink
-   the brand name to one line, and tighten the pill so the phone number
-   (kept fully visible, per her request) has room to breathe. */
+/* Narrow phones: brand name + phone pill + hamburger were fighting for room on one row. Drop
+   the "Praxis für Physiotherapie" subtitle, shrink the brand name to one line, and tighten
+   the pill so the phone number (kept fully visible, per her request) has room to breathe. */
 @media (max-width: 420px) {
   .header-inner { gap: 10px; }
 
   .brand { gap: 8px; }
   .brand-logo { height: 32px; }
-  .brand-name { font-size: 15px; white-space: nowrap; }
+  .brand-name {
+    font-size: 15px;
+    white-space: nowrap;
+  }
   .brand-name small { display: none; }
 
   .nav-cluster { gap: 10px; }

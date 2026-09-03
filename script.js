@@ -1,20 +1,20 @@
-/* ============================================================
+/* =============================================================================
    MATTENBERGER SITE — BEHAVIOR
-   ------------------------------------------------------------
-   This file handles everything that reacts to a click or scroll.
-   It's split into clearly-labeled parts. None of it changes how
-   things LOOK (that's style.css) or WHAT is on the page (index.html) —
-   it only wires up the interactions.
-   ============================================================ */
+   -----------------------------------------------------------------------------
+   This file handles everything that reacts to a click or scroll. It's split
+   into clearly-labeled parts. None of it changes how things LOOK (that's
+   style.css) or WHAT is on the page (index.html) — it only wires up the
+   interactions.
+   ============================================================================= */
 
 /* Wait until the page's HTML is fully loaded before wiring anything up. */
 document.addEventListener('DOMContentLoaded', function () {
 
-  /* ==========================================================
+  /* ===========================================================================
      1) MOBILE MENU
-     On phones the menu links hide behind the hamburger button.
-     Tapping it shows/hides them. Tapping a link closes it again.
-     ========================================================== */
+     On phones the menu links hide behind the hamburger button. Tapping it
+     shows/hides them. Tapping a link closes it again.
+     =========================================================================== */
   const header = document.getElementById('siteHeader');
   const menuToggle = document.getElementById('menuToggle');
 
@@ -30,12 +30,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* ==========================================================
+  /* ===========================================================================
      2) ACCORDIONS  (Berufliche Erfahrungen, Ihr Termin, legal)
-     Each row opens/closes on its own — several can be open at once.
-     We animate the height by setting max-height to the content's
-     real height when open, and back to 0 when closed.
-     ========================================================== */
+     Each row opens/closes on its own — several can be open at once. We animate
+     the height by setting max-height to the content's real height when open,
+     and back to 0 when closed.
+     =========================================================================== */
   const accordionItems = document.querySelectorAll('.accordion-item');
 
   accordionItems.forEach(function (item) {
@@ -56,106 +56,90 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* ==========================================================
-     3) THERAPY TILES  (click a tile -> wide detail box opens below)
-     Only one is open at a time. The detail content for each tile
-     lives inside that tile's <template> tag in index.html, so to
-     edit a therapy's text you only touch the HTML, never this file.
-     ========================================================== */
+  /* ===========================================================================
+     3) THERAPY TILES  (click a tile -> it expands in place)
+     Only one is open at a time. The detail content for each tile lives inside
+     that tile's <template> tag in index.html, so to edit a therapy's text you
+     only touch the HTML, never this file. Expanding is just: build a
+     .tile-detail block, drop it into that tile, hide the compact button, let
+     CSS (.expanded) span it across the row. No repositioning math needed on
+     resize — the grid handles that on its own.
+     =========================================================================== */
   const grid = document.getElementById('therapyGrid');
-  const cards = Array.from(grid.querySelectorAll('.therapy-card'));
+  const tiles = Array.from(grid.querySelectorAll('.therapy-tile'));
 
-  /* A small image-placeholder icon reused inside the detail box. */
+  /* Placeholder icon for the two tiles still waiting on a real photo. */
   const detailImageIcon =
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
     '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
 
-  /* Build the single detail box once; we move and refill it as needed. */
-  const panel = document.createElement('div');
-  panel.className = 'therapy-detail-panel';
-  let activeCard = null;
+  let expandedTile = null;
 
-  function fillPanel(card) {
-    const template = card.querySelector('template');
-    panel.innerHTML = '';
+  function expandTile(tile) {
+    const template = tile.querySelector('template');
+    const photo = tile.querySelector('.therapy-photo img');
 
-    /* Close (X) button */
     const closeBtn = document.createElement('button');
     closeBtn.className = 'detail-close';
     closeBtn.setAttribute('aria-label', 'Schließen');
     closeBtn.innerHTML = '&#10005;';
-    closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closePanel(); });
-    panel.appendChild(closeBtn);
-
-    /* Layout: a larger image placeholder on the left, text on the right. */
-    const inner = document.createElement('div');
-    inner.className = 'detail-inner';
+    closeBtn.addEventListener('click', function (e) { e.stopPropagation(); collapseTile(tile); });
 
     const image = document.createElement('div');
     image.className = 'detail-image';
-    image.innerHTML = detailImageIcon;
+    if (photo) {
+      const img = document.createElement('img');
+      img.src = photo.src;
+      img.alt = photo.alt;
+      image.appendChild(img);
+    } else {
+      image.innerHTML = detailImageIcon;
+    }
 
     const text = document.createElement('div');
     text.className = 'detail-text';
     text.appendChild(template.content.cloneNode(true));  /* copy the tile's detail content in */
 
+    const inner = document.createElement('div');
+    inner.className = 'detail-inner';
     inner.appendChild(image);
     inner.appendChild(text);
-    panel.appendChild(inner);
+
+    const detail = document.createElement('div');
+    detail.className = 'tile-detail';
+    detail.appendChild(closeBtn);
+    detail.appendChild(inner);
+
+    tile.appendChild(detail);
+    tile.classList.add('expanded');
+    expandedTile = tile;
   }
 
-  /* Places the detail box on its own full-width row, directly after
-     the LAST tile in the same row as the clicked tile — so it always
-     appears below that row, at any screen width. */
-  function placePanelAfterRowOf(card) {
-    if (panel.parentNode) panel.parentNode.removeChild(panel);  /* detach first so it doesn't skew the measurement */
-
-    const rowTop = card.offsetTop;
-    let lastInRow = card;
-    cards.forEach(function (c) {
-      if (Math.abs(c.offsetTop - rowTop) < 2) lastInRow = c;  /* same visual row = same distance from the top */
-    });
-
-    grid.insertBefore(panel, lastInRow.nextSibling);
+  function collapseTile(tile) {
+    const detail = tile.querySelector('.tile-detail');
+    if (detail) tile.removeChild(detail);
+    tile.classList.remove('expanded');
+    if (expandedTile === tile) expandedTile = null;
   }
 
-  function openPanel(card) {
-    fillPanel(card);
-    placePanelAfterRowOf(card);
-    panel.classList.add('open');
-    cards.forEach(function (c) { c.classList.remove('active'); });
-    card.classList.add('active');
-    activeCard = card;
-  }
-
-  function closePanel() {
-    panel.classList.remove('open');
-    if (panel.parentNode) panel.parentNode.removeChild(panel);
-    cards.forEach(function (c) { c.classList.remove('active'); });
-    activeCard = null;
-  }
-
-  cards.forEach(function (card) {
+  tiles.forEach(function (tile) {
+    const card = tile.querySelector('.therapy-card');
     card.addEventListener('click', function () {
-      if (activeCard === card) {
-        closePanel();          /* clicking the open tile again closes it */
+      if (expandedTile === tile) {
+        collapseTile(tile);           /* clicking the open tile again closes it */
       } else {
-        openPanel(card);       /* otherwise open this one (and close any other) */
+        if (expandedTile) collapseTile(expandedTile);  /* only one open at a time */
+        expandTile(tile);
       }
     });
   });
 
-  /* Keep the box under the right row if the window is resized. */
-  window.addEventListener('resize', function () {
-    if (activeCard) placePanelAfterRowOf(activeCard);
-  });
-
-  /* ==========================================================
+  /* ===========================================================================
      4) FADE-IN ON SCROLL
-     Anything with class="reveal" fades up the first time it
-     scrolls into view. (Uses IntersectionObserver, the browser's
-     built-in "is this element visible yet?" tool.)
-     ========================================================== */
+     Anything with class="reveal" fades up the first time it scrolls into view.
+     (Uses IntersectionObserver, the browser's built-in "is this element visible
+     yet?" tool.)
+     =========================================================================== */
   const revealObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
@@ -169,11 +153,11 @@ document.addEventListener('DOMContentLoaded', function () {
     revealObserver.observe(el);
   });
 
-  /* ==========================================================
+  /* ===========================================================================
      5) BACK-TO-TOP
-     The floating round button appears once you've scrolled down,
-     and both it and the footer "Nach oben" button return to top.
-     ========================================================== */
+     The floating round button appears once you've scrolled down, and both it
+     and the footer "Nach oben" button return to top.
+     =========================================================================== */
   const toTop = document.getElementById('toTop');
 
   window.addEventListener('scroll', function () {
