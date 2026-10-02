@@ -32,27 +32,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ===========================================================================
      2) ACCORDIONS  (Berufliche Erfahrungen, Ihr Termin, legal)
-     Each row opens/closes on its own — several can be open at once. We animate
-     the height by setting max-height to the content's real height when open,
-     and back to 0 when closed.
+     Each row opens/closes on its own — several can be open at once. A pixel
+     max-height is only used to animate; once open we drop the cap to "none".
+     That matters because the Anreise row holds photos: with a fixed cap
+     measured at click time, anything that grew afterwards (an image finishing
+     loading, a reflow) got silently clipped by overflow:hidden.
      =========================================================================== */
   const accordionItems = document.querySelectorAll('.accordion-item');
 
   accordionItems.forEach(function (item) {
     const trigger = item.querySelector('.accordion-trigger');
     const content = item.querySelector('.accordion-content');
+    let capTimer = null;
 
     trigger.addEventListener('click', function () {
       const isOpen = item.classList.toggle('open');
-      content.style.maxHeight = isOpen ? content.scrollHeight + 'px' : null;
-    });
-  });
+      clearTimeout(capTimer);
 
-  /* If the window is resized while a row is open, recompute its
-     height so the text never gets clipped. */
-  window.addEventListener('resize', function () {
-    document.querySelectorAll('.accordion-item.open .accordion-content').forEach(function (content) {
-      content.style.maxHeight = content.scrollHeight + 'px';
+      if (isOpen) {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        /* Timer rather than transitionend, so it still runs for anyone with
+           reduced motion turned on (no transition means no transitionend). */
+        capTimer = setTimeout(function () {
+          if (item.classList.contains('open')) content.style.maxHeight = 'none';
+        }, 300);
+      } else {
+        /* Back to a concrete height first, otherwise there's nothing to
+           animate from when the cap is currently "none". */
+        content.style.maxHeight = content.scrollHeight + 'px';
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () { content.style.maxHeight = '0px'; });
+        });
+      }
     });
   });
 
@@ -167,5 +178,50 @@ document.addEventListener('DOMContentLoaded', function () {
   function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
   toTop.addEventListener('click', scrollToTop);
   document.getElementById('backToTopLink').addEventListener('click', scrollToTop);
+
+  /* ===========================================================================
+     6) PHOTO LIGHTBOX  (tap a photo -> full-size, with an X to close)
+     Built once and reused, same pattern as the therapy detail box. Closes on
+     the X, a click on the dark backdrop, or Escape.
+     =========================================================================== */
+  const lightbox = document.createElement('div');
+  lightbox.className = 'lightbox';
+
+  const lightboxImg = document.createElement('img');
+  lightbox.appendChild(lightboxImg);
+
+  const lightboxClose = document.createElement('button');
+  lightboxClose.className = 'lightbox-close';
+  lightboxClose.setAttribute('aria-label', 'Schließen');
+  lightboxClose.innerHTML = '&#10005;';
+  lightbox.appendChild(lightboxClose);
+
+  document.body.appendChild(lightbox);
+
+  function openLightbox(src, alt) {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt;
+    lightbox.classList.add('is-open');
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    lightboxImg.src = '';
+  }
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function (e) {
+    if (e.target === lightbox) closeLightbox();  /* backdrop, not the photo itself */
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  document.querySelectorAll('.photo-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const img = btn.querySelector('img');
+      openLightbox(img.src, img.alt);
+    });
+  });
 
 });

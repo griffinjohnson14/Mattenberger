@@ -107,6 +107,11 @@ a:focus-visible, button:focus-visible {
   padding: 0 24px;
 }
 
+/* The phone number has spaces in it for readability, which are also valid
+   line-break points — wrap it in this wherever it sits in running text so
+   it can't split across two lines. */
+.nowrap { white-space: nowrap; }
+
 /* Small "eyebrow" label used above headings throughout the site. */
 .eyebrow {
   color: var(--red);
@@ -166,9 +171,10 @@ header {
 }
 
 .brand-logo {
-  height: 38px;
+  height: 44px;
   width: auto;
   display: block;
+  flex-shrink: 0;
 }
 
 .brand-name {
@@ -276,6 +282,19 @@ header {
   z-index: 1;
   max-width: 640px;
   padding: 64px 0;
+}
+
+/* The logo's own colors (red + teal) would nearly vanish against the hero's
+   red gradient, so it sits on its own white disc. */
+.hero-logo {
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  background: var(--white);
+  border-radius: 50%;
+  display: block;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
 }
 
 .hero-eyebrow {
@@ -416,12 +435,18 @@ header {
 .section-head p { color: var(--ink-soft); }
 
 /* ---- Introduction chapter ---- */
+/* Named areas (not just DOM order) so the portrait can sit between the intro
+   text and the accordion on mobile while still sitting beside both of them,
+   spanning both rows, on desktop — see the mobile override below. */
 .intro-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+  grid-template-areas: "text portrait" "accordion portrait";
   gap: 48px;
-  align-items: center;
+  align-items: start;
 }
+
+.intro-text { grid-area: text; }
 
 .intro-quote {
   margin-top: 40px;
@@ -454,6 +479,7 @@ header {
 /* When you swap a placeholder box for a real <img>, give it the matching
    helper class so it takes the same size and rounded shape as the box did. */
 .intro-portrait-img {
+  grid-area: portrait;
   width: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
@@ -509,7 +535,10 @@ header {
   max-width: 860px;
 }
 
-.intro-accordion { margin-top: 22px; }
+.intro-accordion {
+  grid-area: accordion;
+  margin-top: 22px;
+}
 
 .accordion-item {
   background: var(--white);
@@ -573,6 +602,31 @@ header {
 }
 
 .anreise-photo { margin: 4px 0 14px; }
+
+/* Two photos that belong to the same moment sit side by side instead of
+   each taking a full-width row — cuts down how much you have to scroll
+   through on a phone. */
+.anreise-photo-row {
+  display: flex;
+  gap: 10px;
+  margin: 4px 0 14px;
+}
+
+.anreise-photo-row .anreise-photo {
+  flex: 1 1 0;
+  margin: 0;
+  min-width: 0;
+}
+
+/* Shared by every photo that opens in the lightbox (Anreise + Praxis). */
+.photo-btn {
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: zoom-in;
+}
 
 .anreise-photo img {
   width: 100%;
@@ -777,16 +831,16 @@ header {
   color: var(--white);
 }
 
-/* ---- Die Praxis: two room pictures ---- */
+/* ---- Die Praxis: heading and text on top, the two room pictures below
+        them side by side (her request — they used to sit beside the text). ---- */
 .praxis-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: 40px;
-  align-items: center;
+  gap: 28px;
 }
 
 .praxis-photos {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
 }
 
@@ -884,6 +938,14 @@ footer {
 .legal-accordion .accordion-trigger .chev { color: var(--cream); }
 .legal-accordion .accordion-content-inner { color: rgba(245,240,232,0.8); }
 
+/* Links here were using the site-wide red, which nearly disappears against
+   this same dark-red footer band — bright + underlined so they actually stand out. */
+.legal-accordion .accordion-content-inner a {
+  color: var(--white);
+  text-decoration: underline;
+}
+.legal-accordion .accordion-content-inner a:hover { color: var(--cream); }
+
 .footer-copy {
   font-size: 13px;
   color: rgba(245,240,232,0.55);
@@ -925,19 +987,65 @@ footer {
 .to-top:hover { background: var(--red-deep); }
 
 /* =============================================================================
+   PHOTO LIGHTBOX  (tap a photo to see it full-size, on top of everything else)
+   ============================================================================= */
+/* display:none by default, .is-open flips it to flex — same open/closed
+   class pattern as everything else on the site (menu, accordions, tiles).
+   Relying on the hidden attribute instead was the bug: this rule's own
+   display:flex silently overrides the browser's default display:none for
+   [hidden], since author CSS always wins over that built-in default. */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(43, 35, 32, 0.92);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.lightbox.is-open { display: flex; }
+
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.lightbox-close:hover { background: var(--cream); }
+
+/* =============================================================================
    MOBILE  (phones and small tablets)
    Menu collapses behind the hamburger; phone stays visible.
    ============================================================================= */
+/* 860px is the one "tablet and below" breakpoint — the hamburger nav used to
+   only kick in at 680px, leaving a gap between 681-860px where the header had
+   to fit the full desktop nav (3 links + phone pill + logo) in less room than
+   it needs, which is what was causing the overflow/vanishing-padding reports. */
 @media (max-width: 860px) {
-  .intro-grid, .praxis-grid {
+  .intro-grid {
     grid-template-columns: 1fr;
     gap: 32px;
+    /* Her request: text, then her photo, then Berufliche Erfahrungen. */
+    grid-template-areas: "text" "portrait" "accordion";
   }
 
-  .praxis-grid .praxis-text { order: -1; } /* text above the photos on mobile */
-}
-
-@media (max-width: 680px) {
   .menu-toggle {
     display: flex;
     align-items: center;
